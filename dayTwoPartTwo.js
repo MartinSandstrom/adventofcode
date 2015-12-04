@@ -29,5 +29,5 @@ function calculatePresent(inputString){
 }
 
 
-console.log('34',calculatePresent('2x3x4'));
-console.log('14',calculatePresent('1x1x10'));
+//console.log('34',calculatePresent('2x3x4'));
+//console.log('14',calculatePresent('1x1x10'));

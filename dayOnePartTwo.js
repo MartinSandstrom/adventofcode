@@ -24,5 +24,5 @@ function findIndex(inputString){
 
 
 
-console.log('1', findIndex(')'));
-console.log('5', findIndex('()())'));
+//console.log('1', findIndex(')'));
+//console.log('5', findIndex('()())'));

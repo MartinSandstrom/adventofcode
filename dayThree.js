@@ -59,6 +59,6 @@ function isCounted(obj){
     return found;
 }
 
-console.log('2',caculateHouses('>'));
-console.log('4',caculateHouses('^>v<'));
-console.log('2',caculateHouses('^v^v^v^v^v'));
+//console.log('2',caculateHouses('>'));
+//console.log('4',caculateHouses('^>v<'));
+//console.log('2',caculateHouses('^v^v^v^v^v'));
