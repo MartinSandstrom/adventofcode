@@ -45,7 +45,7 @@ function repeatsWithOneBetween(inputString) {
 	return hasRepeaingBehaviour;
 }
 
-console.log('Ja', isGoodString('qjhvhtzxzqqjkmpb'));
-console.log('Ja', isGoodString('xxyxx'));
-console.log('Nej', repeatsWithOneBetween('uurcxstgmygtbstg'));
-console.log('Nej', hasPairThatRepeat('ieodomkazucvgmuy'));
+// console.log('Ja', isGoodString('qjhvhtzxzqqjkmpb'));
+// console.log('Ja', isGoodString('xxyxx'));
+// console.log('Nej', repeatsWithOneBetween('uurcxstgmygtbstg'));
+// console.log('Nej', hasPairThatRepeat('ieodomkazucvgmuy'));
