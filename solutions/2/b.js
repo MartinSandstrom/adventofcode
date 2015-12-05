@@ -4,7 +4,7 @@ fs.readFile("../../test-data/day-two.txt", "utf8", function (error, data) {
     if(error) {
         console.log(error);
     }
-    var presents = data.split(/\r\n/);
+    var presents = data.split(/\n/);
     var total = 0;
     for (var i = 0; i < presents.length; i++) {
         total = total + calculatePresent(presents[i]);
