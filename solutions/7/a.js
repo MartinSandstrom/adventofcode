@@ -52,7 +52,7 @@ function populateAnswerObj(inputCommand) {
 	var number = information[0];
 	var f = information[0];
 	var s = information[2];
-	if (isNaN(number) && inputCommand.indexOf('AND') > -1) {
+	if (inputCommand.indexOf('AND') > -1) {
 		var first = isNaN(f) ? answerObj[f].toString(2) : f.toString(2);
 		var second = isNaN(s) ? answerObj[s].toString(2) : s.toString(2);
 		var andValue = first & second;
@@ -73,12 +73,10 @@ function populateAnswerObj(inputCommand) {
 	} else if (inputCommand.indexOf('NOT') > -1) {
 		var n = information[1];
 		var a = answerObj[n].toString(2);
-		var value = ~(a);
-		answerObj[information[information.length - 1]] = (65536 + parseInt(value.toString(10)));
-	} else if(inputCommand.indexOf('->') > -1 && isNaN(number)) {
-		answerObj[information[information.length - 1]] =  answerObj[information[0]];
+		var value = ~(a >>> 0);
+		answerObj[information[information.length - 1]] = value;
 	} else {
-		answerObj[information[information.length - 1]] = number;
+		answerObj[information[information.length - 1]] = isNaN(number) ? answerObj[information[0]] : number;
 	}
 }
 /*
