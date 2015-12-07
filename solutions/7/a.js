@@ -20,24 +20,25 @@ fs.readFile('../../test-data/day-seven.txt', 'utf8', function (error, data) {
 function findNextCommand() {
 	for (var i = 0; i < inputStrings.length; i++) {
 		var information = inputStrings[i].split(' ');
-		if((information.indexOf('AND') > -1) || (information.indexOf('OR') > -1)) {
-			if ((answerObj[information[0]] || !isNaN(information[0])) && (answerObj[information[2]]|| !isNaN(information[2]))) {
-				var command = inputStrings.splice(i, 1);
+		var command;
+		if ((information.indexOf('AND') > -1) || (information.indexOf('OR') > -1)) {
+			if ((answerObj[information[0]] || !isNaN(information[0])) && (answerObj[information[2]] || !isNaN(information[2]))) {
+				command = inputStrings.splice(i, 1);
 				return command[0];
 			}
-		} else if(information.indexOf('LSHIFT') > -1 || information.indexOf('RSHIFT') > -1) {
+		} else if (information.indexOf('LSHIFT') > -1 || information.indexOf('RSHIFT') > -1) {
 			if (answerObj[information[0]] || !isNaN(information[0])) {
-					var command = inputStrings.splice(i, 1);
+				command = inputStrings.splice(i, 1);
 				return command[0];
 			}
-		}else if(inputStrings[i].indexOf('NOT') > -1) {
+		} else if (inputStrings[i].indexOf('NOT') > -1) {
 			if (answerObj[information[1]] || !isNaN(information[1])) {
-				var command = inputStrings.splice(i, 1);
+				command = inputStrings.splice(i, 1);
 				return command[0];
 			}
-		} else if(inputStrings[i].indexOf('->') > -1) {
+		} else if (inputStrings[i].indexOf('->') > -1) {
 			if (answerObj[information[0]] || !isNaN(information[0])) {
-				var command = inputStrings.splice(i, 1);
+				command = inputStrings.splice(i, 1);
 				return command[0];
 			}
 		}
@@ -55,9 +56,9 @@ function populateAnswerObj(inputCommand) {
 		var andValue = first & second;
 		answerObj[information[information.length - 1]] = andValue.toString(10);
 	} else if (inputCommand.indexOf('OR') > -1) {
-		var first = isNaN(f) ? answerObj[f].toString(2) : f.toString(2);
-		var second = isNaN(s) ? answerObj[s].toString(2) : s.toString(2);
-		var orValue = first | second;
+		var fi = isNaN(f) ? answerObj[f].toString(2) : f.toString(2);
+		var se = isNaN(s) ? answerObj[s].toString(2) : s.toString(2);
+		var orValue = fi | se;
 		answerObj[information[information.length - 1]] = orValue.toString(10);
 	} else if (inputCommand.indexOf('LSHIFT') > -1) {
 		var lsValue = information[2];
