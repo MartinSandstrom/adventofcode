@@ -15,15 +15,6 @@ fs.readFile('../../test-data/day-seven.txt', 'utf8', function (error, data) {
             populateAnswerObj(command);
         }
     }
-    inputStrings = data.split(/\r\n/);
-    console.log('NYTT');
-    inputString = inputStrings.filter(Boolean);
-    while (!answerObj['a']) {
-        var command = findNextCommand();
-        if(command) {
-            populateAnswerObj(command);
-        }
-    }
     console.log(answerObj.a);
 });
 
