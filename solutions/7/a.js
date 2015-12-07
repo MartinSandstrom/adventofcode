@@ -6,7 +6,7 @@ fs.readFile('../../test-data/day-seven.txt', 'utf8', function (error, data) {
 	if (error) {
 		console.log(error);
 	}
-	inputStrings = data.split(/\r\n/);
+	inputStrings = data.split(/\n/);
 	while (!answerObj.a) {
 		var command = findNextCommand();
 		if (command) {
