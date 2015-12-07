@@ -7,18 +7,15 @@ fs.readFile('../../test-data/day-seven.txt', 'utf8', function (error, data) {
 		console.log(error);
 	}
 	inputStrings = data.split(/\r\n/);
-	inputString = inputStrings.filter(Boolean);
-	while (!answerObj['a']) {
+	while (!answerObj.a) {
 		var command = findNextCommand();
-		if(command) {
+		if (command) {
 			console.log('running command: ', command);
 			populateAnswerObj(command);
 		}
 	}
 	console.log(answerObj.a);
 });
-
-
 
 function findNextCommand() {
 	for (var i = 0; i < inputStrings.length; i++) {
