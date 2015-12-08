@@ -7,7 +7,6 @@ fs.readFile('../../test-data/day-eight.txt', 'utf8', function (error, data) {
 	}
 	var inputStrings = data.split(/\n/);
   inputStrings = inputStrings.filter(Boolean);
-  console.log(inputStrings);
   for (var i = 0; i < inputStrings.length; i++) {
     countNumberOfChars(inputStrings[i]);
   }
@@ -18,12 +17,3 @@ fs.readFile('../../test-data/day-eight.txt', 'utf8', function (error, data) {
 function countNumberOfChars (s) {
   answer += s.length - eval(s).length;
 }
-
-
-
-//countNumberOfChars("");
-//countNumberOfChars("abc");
-//countNumberOfChars("aaa\"aaa");
-//countNumberOfChars("\x27");
-
-//console.log(numberOfCodeChars - numberOfChars);
