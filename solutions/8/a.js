@@ -6,14 +6,13 @@ fs.readFile('../../test-data/day-eight.txt', 'utf8', function (error, data) {
 		console.log(error);
 	}
 	var inputStrings = data.split(/\n/);
-  inputStrings = inputStrings.filter(Boolean);
-  for (var i = 0; i < inputStrings.length; i++) {
-    countNumberOfChars(inputStrings[i]);
-  }
-  console.log('answer', answer);
+	inputStrings = inputStrings.filter(Boolean);
+	for (var i = 0; i < inputStrings.length; i++) {
+		countNumberOfChars(inputStrings[i]);
+	}
+	console.log('answer', answer);
 });
 
-
-function countNumberOfChars (s) {
-  answer += s.length - eval(s).length;
+function countNumberOfChars(s) {
+	answer += s.length - eval(s).length;
 }
