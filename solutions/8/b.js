@@ -10,7 +10,7 @@ fs.readFile('../../test-data/day-eight.txt', 'utf8', function (error, data) {
 	for (var i = 0; i < inputStrings.length; i++) {
 		countNumberOfChars(inputStrings[i]);
 	}
-	console.log('answer', answer);
+	console.log('answer: ', answer);
 });
 
 function countNumberOfChars(s) {
