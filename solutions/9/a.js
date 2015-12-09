@@ -1,12 +1,7 @@
-// var testData = ['London to Dublin = 464',
-// 'London to Belfast = 518',
-// 'Dublin to Belfast = 141'];
 
 var lines = [];
-
 var permArr = [];
 var usedChars = [];
-
 var fs = require('fs');
 
 fs.readFile('../../test-data/day-nine.txt', 'utf8', function (error, data) {
