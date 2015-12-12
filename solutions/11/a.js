@@ -1,6 +1,4 @@
 
-var alphabet = 'abcdefghijklmnopqrstuvwxyz';
-
 function getNewPassword(inputString) {
 	var newPassword = false;
 	while (!newPassword) {
@@ -13,17 +11,7 @@ function getNewPassword(inputString) {
 }
 
 function hasIncreasingThreeLetters(is) {
-	var found = false;
-	for (var i = 0; i < is.length; i++) {
-		var l = is[i];
-		var index = alphabet.indexOf(l);
-		var next = alphabet[index + 1];
-		var third = alphabet[index + 2];
-		if (is[i + 1] === next && is[i + 2] === third) {
-			found = true;
-		}
-	}
-	return found;
+	return /(abc|bcd|cde|def|efg|fgh|pqr|qrs|rst|stu|tuv|uvw|vwx|wxy|xyz)/.test(is);
 }
 
 function containBadCharacters(inputString) {
