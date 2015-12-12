@@ -35,11 +35,3 @@ function isValidPassword(inputString) {
 }
 
 console.log('answer', getNewPassword('vzbxkghb'));
-console.log((parseInt('abz', 36) + 1).toString(36));
-/*
-console.log('falsesee', isValidPassword('hijklmmn'));
-console.log('false', isValidPassword('abbceffg'));
-console.log('truue', isValidPassword('abc'));
-console.log('truue', isValidPassword('werrhtrtabc'));
-console.log('truuue', isValidPassword('agkopqwnbb'));
-*/
