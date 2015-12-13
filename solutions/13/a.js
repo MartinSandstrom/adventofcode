@@ -3,7 +3,6 @@ var permArr = [];
 var usedChars = [];
 var fs = require('fs');
 var people = ['Alice', 'Bob', 'Carol', 'David', 'Eric', 'Frank', 'Mallory', 'George'];
-var people2 = ['Alice', 'Bob', 'Carol', 'David'];
 var information = [];
 var allSeatings = permute(people);
 
@@ -17,19 +16,6 @@ fs.readFile('../../test-data/day-13.txt', 'utf8', function (error, data) {
 		}
 	}
 	console.log('answer', maxValue);
-});
-
-fs.readFile('../../test-data/day-13-test.txt', 'utf8', function (error, data) {
-	var maxValue = 0;
-	information = data.split('\n');
-	information = information.filter(Boolean);
-	for (var i = 0; i < allSeatings.length; i++) {
-		var value = calculateHappieness(allSeatings[i]);
-		if (value > maxValue) {
-			maxValue = value;
-		}
-	}
-	console.log('answer2', maxValue);
 });
 
 function calculateHappieness(people) {
