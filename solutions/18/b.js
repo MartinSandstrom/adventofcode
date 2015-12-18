@@ -1,7 +1,6 @@
 
 var fs = require('fs');
-var testString = '.#.#.#...##.#....#..#...#.#..#####..';
-var current = testString;
+var current = '';
 var next = '';
 
 String.prototype.replaceAt = function (index, character) {
@@ -27,7 +26,6 @@ fs.readFile('../../test-data/day-18.txt', 'utf8', function (error, data) {
 
 function getNextState(state) {
 	for (var i = 0; i < state.length; i++) {
-		// Remove this is case for part two.
 		if (i === 0 || i === 99 || i === 9999 || i === 9900) {
 			next += '#';
 		} else {
