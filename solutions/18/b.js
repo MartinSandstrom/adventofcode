@@ -4,9 +4,9 @@ var testString = '.#.#.#...##.#....#..#...#.#..#####..';
 var current = testString;
 var next = '';
 
-String.prototype.replaceAt=function(index, character) {
-    return this.substr(0, index) + character + this.substr(index + character.length);
-}
+String.prototype.replaceAt = function (index, character) {
+	return this.substr(0, index) + character + this.substr(index + character.length);
+};
 
 fs.readFile('../../test-data/day-18.txt', 'utf8', function (error, data) {
 	var d = data.split('\n');
@@ -27,6 +27,7 @@ fs.readFile('../../test-data/day-18.txt', 'utf8', function (error, data) {
 
 function getNextState(state) {
 	for (var i = 0; i < state.length; i++) {
+		// Remove this is case for part two.
 		if (i === 0 || i === 99 || i === 9999 || i === 9900) {
 			next += '#';
 		} else {
