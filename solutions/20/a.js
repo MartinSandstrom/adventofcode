@@ -5,7 +5,7 @@ while (!foundHouse) {
 	var numberOfPresents = 0;
 	for (var i = 0; i <= h; i++) {
 		if (h % i === 0) {
-			numberOfPresents += * 10;
+			numberOfPresents += i * 10;
 		}
 	}
 	if (numberOfPresents >= 34000000) {
