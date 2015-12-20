@@ -1,16 +1,17 @@
 
-var foundHouse = false;
-var h = 0;
-while (!foundHouse) {
-	var numberOfPresents = 0;
-	for (var i = h - 50; i <= h; i++) {
-		if (h % i === 0) {
-			numberOfPresents += i * 11;
+for (var i = 1; i < 34000000; i++) {
+	if (dividerTotal(i) * 11 >= 34000000) {
+		console.log(i);
+		break;
+	}
+}
+
+function dividerTotal(nr) {
+	var total = 0;
+	for (var i = 1; i <= 50 && i <= nr; i++) {
+		if (nr % i === 0) {
+			total += nr / i;
 		}
 	}
-	if (numberOfPresents >= 34000000) {
-		console.log('Hus: ', h);
-		foundHouse = true;
-	}
-	h++;
+	return total;
 }
