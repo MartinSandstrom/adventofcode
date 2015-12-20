@@ -3,9 +3,9 @@ var foundHouse = false;
 var h = 0;
 while (!foundHouse) {
 	var numberOfPresents = 0;
-	for (var i = 0; i <= h; i++) {
+	for (var i = h - 50; i <= h; i++) {
 		if (h % i === 0) {
-			numberOfPresents += * 10;
+			numberOfPresents += i * 11;
 		}
 	}
 	if (numberOfPresents >= 34000000) {
