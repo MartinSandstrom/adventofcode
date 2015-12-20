@@ -27,10 +27,10 @@ function generateMolecules(command) {
 		var b = '';
 		var temp = '';
 		if (l === 2) {
-			var st = puzzle[i] + puzzle[i + 1];
+			var st = puzzle[i] + puzzle[i + l - 1];
 			if (st === c) {
 				a = puzzle.substr(0, i);
-				b = puzzle.substr(i + 2, puzzle.length);
+				b = puzzle.substr(i + l, puzzle.length);
 				temp = a + r + b;
 				results.push(temp);
 			}
