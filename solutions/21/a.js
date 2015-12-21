@@ -23,9 +23,8 @@ console.log('Min cost: ', minCost);
 
 function takeOnTheBoss() {
 	for (var i = 0; i < w.length; i++) {
-		currentItemCost = 0;
 		var ii = w[i].split(' ');
-		currentItemCost += parseInt(ii[1], 10);
+		currentItemCost = parseInt(ii[1], 10);
 		player.damage = parseInt(ii[2], 10);
 		for (var j = 0; j < a.length; j++) {
 			var ji = a[j].split(' ');
