@@ -40,6 +40,7 @@ function takeOnTheBoss() {
 					currentItemCost += parseInt(li[1], 10);
 					player.damage += parseInt(li[2], 10);
 					player.armor += parseInt(li[3], 10);
+					// Player is fully equipped and ready to try on the boss.
 					fight();
 					resetStats();
 					currentItemCost -= parseInt(li[1], 10);
