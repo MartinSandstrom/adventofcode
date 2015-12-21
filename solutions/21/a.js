@@ -60,6 +60,7 @@ function resetStats() {
 	boss.hP = 109;
 	player.hP = 100;
 }
+
 function fight() {
 	var pDMG = Math.max((player.damage - boss.armor), 1);
 	var bDMG = Math.max((boss.damage - player.armor), 1);
