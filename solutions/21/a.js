@@ -60,26 +60,13 @@ function resetStats() {
 	player.hP = 100;
 }
 function fight() {
-	var someoneIsDead = false;
 	var pDMG = Math.max((player.damage - boss.armor), 1);
 	var bDMG = Math.max((boss.damage - player.armor), 1);
-	while (!someoneIsDead) {
+	while (boss.hP > 0 && player.hP > 0) {
 		boss.hP -= pDMG;
 		if (boss.hP <= 0) {
-			console.log('You win! ItemsCost: ', currentItemCost);
-			if (currentItemCost < minCost) {
-				minCost = currentItemCost;
-			}
-			someoneIsDead = true;
-			break;
+			minCost = Math.min(currentItemCost, minCost);
 		}
 		player.hP -= bDMG;
-		if (player.hP <= 0) {
-			console.log('You Lose! Go buy better gear. ItemsCost: ', currentItemCost);
-			someoneIsDead = true;
-			break;
-		}
-		// console.log('Boss', boss.hP);
-		// console.log('Player', player.hP);
 	}
 }
