@@ -43,7 +43,7 @@ var castSpells = {
 	}
 };
 
-var spells = ['p', 'r', 's', 'p', 'm', 'm', 'm', 'm', 'm', 'm'];
+var spells = ['p', 'r', 's', 'p', 'r', 'd', 'p', 'd', 'm'];
 var roundNumber = 0;
 fight();
 
@@ -58,6 +58,12 @@ function resetStats() {
 
 function fight() {
 	while (boss.hP > 0 && player.hP > 0) {
+		player.hP -= 1;
+		if (player.hP <= 0) {
+			minManaCost = Math.min(manaCost, minManaCost);
+			console.log('You loose!');
+			break;
+		}
 		runEffects();
 		// Player cast spell
 		var spell = spells[roundNumber];
@@ -80,6 +86,7 @@ function fight() {
 		if (player.hP <= 0) {
 			minManaCost = Math.min(manaCost, minManaCost);
 			console.log('You loose!');
+			break;
 		}
 		roundNumber++;
 	}
