@@ -1,16 +1,18 @@
+
+// Change a to 0 for part one.
 var regs = {
-	a: 0,
+	a: 1,
 	b: 0
 };
 var fs = require('fs');
 
-fs.readFile('../../test-data/day-22.txt', 'utf8', function (error, data) {
+fs.readFile('../../test-data/day-23.txt', 'utf8', function (error, data) {
 	var info = data.split('\n');
 	info = info.filter(Boolean);
 	var i = 0;
 	while (i < info.length) {
 		var sumToAdd = calculate(info[i]);
-		i += sumToAdd;
+		i += parseInt(sumToAdd, 10);
 	}
 	console.log(regs);
 });
