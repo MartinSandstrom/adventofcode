@@ -4,7 +4,8 @@ var min = 1000000000000;
 for (var i = 0; i < allPackages.length; i++) {
 	third += allPackages[i];
 }
-third /= 3;
+// Change to 3 for part one.
+third /= 4;
 var a = combine(allPackages, 3, 7);
 for (var l = 0; l < a.length; l++) {
 	var numbers = a[l];
