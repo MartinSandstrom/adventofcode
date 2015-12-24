@@ -19,7 +19,7 @@ for (var l = 0; l < a.length; l++) {
 		min = Math.min(QE, min);
 	}
 }
-console.log(min);
+console.log('Answer', min);
 
 function combine(a, min, max) {
 	var fn = function (n, src, got, all) {
