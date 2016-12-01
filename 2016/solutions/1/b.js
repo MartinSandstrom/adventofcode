@@ -36,6 +36,8 @@ var doMagic = (data) => {
 
 var handleIndex = (input) =>  input === 'R' ? index++ : index--;
 
+var hasBeenVisited = (newLocation) => locations.indexOf(newLocation) > -1;
+
 var calculateNewPos = (numberToUse) => {
     var position = positions[index];
     var newLocation;
@@ -46,19 +48,12 @@ var calculateNewPos = (numberToUse) => {
         if(position === 'W') x--;
         
         newLocation = x + ',' + y;
-        if(hasBeenVisited(newLocation)) {
-            return false;
-        }
+        if(hasBeenVisited(newLocation)) return false;
+        locations.push(newLocation);
     }
     return true;
 };
 
-var hasBeenVisited = (currentLocation) => {
-    if(locations.indexOf(currentLocation) > -1) {
-        return true;
-    }
-    locations.push(currentLocation);
-};
 
 //doMagic('R8, R4, R4, R8');
 //console.log('x:', x);
