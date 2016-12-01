@@ -90,7 +90,6 @@ var hasBeenVisited = (currentLocation) => {
     if(locations.indexOf(currentLocation) > -1) {
         return true;
     }
-    locations.push(currentLocation);
 };
 
 //doMagic('R8, R4, R4, R8');
@@ -99,11 +98,3 @@ var hasBeenVisited = (currentLocation) => {
 //console.log(locations);
 //console.log(currentLocation);
 //console.log('Answer:', x + y);
-
-
-//console.log(')))', count(')))'));
-//console.log('(((', count('((('));
-//console.log('((()))', count('((()))'));
-//console.log('((((())', count('((((())'));
-//console.log('((()))(())', count('((()))(())'));
-//console.log('(((()()()()()', count('(((()()()()()'));
