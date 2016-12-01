@@ -16,7 +16,7 @@ var y = 0;
 var doMagic = (data) => {
     data.split(', ').forEach((input) => {
         
-        handleIndex(input[0]);
+        handleIndex(input);
         if(index > 3) index = 0;            
         else if (index < 0) index = 3;
         
@@ -25,7 +25,7 @@ var doMagic = (data) => {
     });
 };
 
-var handleIndex = (input) => input === 'R' ? index++ : index--;
+var handleIndex = (input) => input[0] === 'R' ? index++ : index--;
 
 var calculateNewPos = (numberToUse) => {
     if(positions[index] === 'N') y += parseInt(numberToUse);
