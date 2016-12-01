@@ -39,44 +39,16 @@ var handleIndex = (input) =>  input === 'R' ? index++ : index--;
 var calculateNewPos = (numberToUse) => {
     var position = positions[index];
     var newLocation;
-    var i;
-    switch (position) {
-        case 'N':
-            for (i = 0; i < numberToUse; i++) {
-                y++;
-                newLocation = x + ',' + y;
-                if(hasBeenVisited(newLocation)) {
-                    return false;
-                }
-            }
-            break;
-        case 'E':
-            for (i = 0; i < numberToUse; i++) {
-                x++;
-                newLocation = x + ',' + y;
-                if(hasBeenVisited(newLocation)) {
-                    return false;
-                }
-            }
-            break;
-        case 'S':
-            for (i = 0; i < numberToUse; i++) {
-                y--;
-                newLocation = x + ',' + y;
-                if(hasBeenVisited(newLocation)) {
-                    return false;
-                }
-            }
-            break;
-        default:
-            for (i = 0; i < numberToUse; i++) {
-                x--;
-                newLocation = x + ',' + y;
-                if(hasBeenVisited(newLocation)) {
-                    return false;
-                }
-            }
-            break;
+    for (var i = 0; i < numberToUse; i++) {
+        if(position === 'N') y++;
+        if(position === 'E') x++;
+        if(position === 'S') y--;
+        if(position === 'W') x--;
+        
+        newLocation = x + ',' + y;
+        if(hasBeenVisited(newLocation)) {
+            return false;
+        }
     }
     return true;
 };
