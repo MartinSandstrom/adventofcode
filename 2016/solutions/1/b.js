@@ -34,9 +34,7 @@ var doMagic = (data) => {
     });
 };
 
-var handleIndex = (input) => {
-    return input === 'R' ? index++ : index--;
-};
+var handleIndex = (input) =>  input === 'R' ? index++ : index--;
 
 var calculateNewPos = (numberToUse) => {
     var position = positions[index];

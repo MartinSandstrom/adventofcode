@@ -38,4 +38,4 @@ var calculateNewPos = (numberToUse) => {
     if(position === 'E') x += parseInt(numberToUse);
     if(position === 'S') y -= parseInt(numberToUse);
     if(position === 'W') x -= parseInt(numberToUse);
-}
+};
