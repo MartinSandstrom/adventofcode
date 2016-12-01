@@ -4,9 +4,7 @@ fs.readFile("../../test-data/day-one.txt", "utf8", function (error, data) {
     if(error) {
         console.log(error);
     }
-    
     doMagic(data);
-    console.log(currentLocation);
     console.log('Answer:', x + y);
     
 });
@@ -16,7 +14,6 @@ var index = 0;
 var x = 0;
 var y = 0;
 var locations = [];
-var currentLocation = '0,0';
 
 var doMagic = (data) => {
     var array = data.split(', ');
@@ -90,6 +87,7 @@ var hasBeenVisited = (currentLocation) => {
     if(locations.indexOf(currentLocation) > -1) {
         return true;
     }
+    locations.push(currentLocation);
 };
 
 //doMagic('R8, R4, R4, R8');
