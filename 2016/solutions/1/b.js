@@ -21,9 +21,9 @@ var currentLocation = '0,0';
 
 var doMagic = (data) => {
     var array = data.split(', ');
-    for (var i = 0; i < array.length; i++){
+    array.find((input) => {
         var newIndex;
-        var isRight = array[i][0] === 'R';
+        var isRight = input[0] === 'R';
         if(isRight) {
             index++;
             if(index > 3) {
@@ -35,11 +35,11 @@ var doMagic = (data) => {
                 index = 3;
             }
         }
-        var numberToUse = array[i].replace('R', '').replace('L', '');
+        var numberToUse = input.replace('R', '').replace('L', '');
         if(!calculateNewPos(numberToUse)){
-            return false;    
+            return true;    
         }
-    }
+    });
 };
 
 var calculateNewPos = (numberToUse) => {
@@ -87,7 +87,6 @@ var calculateNewPos = (numberToUse) => {
 
 var hasBeenVisited = (currentLocation) => {
     if(locations.indexOf(currentLocation) > -1) {
-        console.log('Current:', currentLocation);
         return true;
     }
     locations.push(currentLocation);
