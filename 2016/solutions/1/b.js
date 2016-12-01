@@ -6,7 +6,6 @@ fs.readFile("../../test-data/day-one.txt", "utf8", function (error, data) {
     }
     doMagic(data);
     console.log('Answer:', x + y);
-    
 });
 
 var positions = ['N', 'E', 'S', 'W'];
@@ -16,25 +15,18 @@ var y = 0;
 var locations = [];
 
 var doMagic = (data) => {
-    var array = data.split(', ');
-    array.find((input) => {
+    data.split(', ').find((input) => {
         
-        handleIndex(input[0]);
-        
-        if(index > 3) {
-            index = 0;            
-        } else if (index < 0) {
-            index = 3;
-        }
+        handleIndex(input);
+        if (index > 3) index = 0;            
+        else if (index < 0) index = 3;
             
         var numberToUse = input.replace('R', '').replace('L', '');
-        if(!calculateNewPos(numberToUse)){
-            return true;    
-        }
+        if(!calculateNewPos(numberToUse)) return true;    
     });
 };
 
-var handleIndex = (input) =>  input === 'R' ? index++ : index--;
+var handleIndex = (input) => input[0] === 'R' ? index++ : index--;
 
 var hasBeenVisited = (newLocation) => locations.indexOf(newLocation) > -1;
 
