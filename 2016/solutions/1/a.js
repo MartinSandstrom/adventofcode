@@ -14,8 +14,7 @@ var x = 0;
 var y = 0;
 
 var doMagic = (data) => {
-    var array = data.split(', ');
-    array.forEach((input) => {
+    data.split(', ').forEach((input) => {
         
         handleIndex(input[0]);
         if(index > 3) index = 0;            
