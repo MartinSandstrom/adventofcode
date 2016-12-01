@@ -30,7 +30,6 @@ var doMagic = (data) => {
 
 var handleIndex = (input) => input === 'R' ? index++ : index--;
 
-
 var calculateNewPos = (numberToUse) => {
     var position = positions[index];
     if(position === 'N') y += parseInt(numberToUse);
