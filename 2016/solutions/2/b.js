@@ -6,7 +6,6 @@ fs.readFile("../../test-data/day-two.txt", "utf8", function (error, data) {
     }
     doMagic(data);
     console.log('Answer:', code);
-    console.log('Correct:', '5DB3');
 });
 var code = '';
 var x = -2;
@@ -48,15 +47,10 @@ var doMagic = (data) => {
             if(input === 'L') tempX--;
             
             var newPostition = tempY + ',' + tempX;
-            console.log(newPostition);
-            console.log(options[newPostition]);
             if(options[newPostition] > -1 || ['A','B','C','D'].indexOf(options[newPostition]) > -1) {
                 x = tempX;
                 y = tempY;
-                console.log(y + ',' + x);
-                
             }
-            console.log('----');
         });
         var cord = y + ',' + x;
         code += options[cord];
