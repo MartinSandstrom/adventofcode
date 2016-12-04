@@ -35,9 +35,7 @@ var sortByValueThenChar = (a, b) => {
 
 var makeDistinctAndCount = (inputString) => {
     var array = [];
-    inputString.split('').forEach((char) => {
-        if(!isInArray(array, char)) array.push({'char': char, 'value': 0});
-    });
+    inputString.split('').forEach((char) => !isInArray(array, char) ? array.push({'char': char, 'value': 0}) : false);
     return array;
 };
 
