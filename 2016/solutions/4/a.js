@@ -17,8 +17,7 @@ var doMagic = (data) => {
         
         
         var combination = room.substring(0, room.lastIndexOf('-'));
-        combination = combination.replace(/-/g, '');
-        var array = createArray(combination);
+        var array = createArray(combination.replace(/-/g, ''));
         array.sort((a, b) => {
             if(a.value<b.value) return 1;
             else if(a.value>b.value) return -1;
@@ -32,8 +31,6 @@ var doMagic = (data) => {
         if(array[0].char === checksum[0] && array[1].char === checksum[1] && array[2].char === checksum[2] && array[3].char === checksum[3] && array[4].char === checksum[4]) {
             total += Number(number);
         }
-        console.log(array);
-        console.log('-----');
 
     });
     return total;
