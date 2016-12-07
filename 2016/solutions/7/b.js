@@ -1,5 +1,4 @@
 var fs = require('fs');
-var crypto = require('crypto');
 
 fs.readFile("../../test-data/day-seven.txt", "utf8", function (error, data) {
     if(error) {
@@ -7,9 +6,6 @@ fs.readFile("../../test-data/day-seven.txt", "utf8", function (error, data) {
     }
     doMagic(data);
 });
-
-
-var numberOfChars = 8;
 
 var doMagic = (data) => {
     var ips = data.split(/\r|\n/);

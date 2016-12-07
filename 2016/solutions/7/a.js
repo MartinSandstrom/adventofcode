@@ -1,5 +1,4 @@
 var fs = require('fs');
-var crypto = require('crypto');
 
 fs.readFile("../../test-data/day-seven.txt", "utf8", function (error, data) {
     if(error) {
