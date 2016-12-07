@@ -1,0 +1,5 @@
+abba[mnop]qrst
+abba[mnop]qrstabba[grao]qrst
+abba[mnop]qrstabba[abba]qrstabba[mnop]qrst
+abba[mnop]qrstabba[gris]qrstabba[abba]qrst
+aaaa[mnop]qrstabca[gris]qrstabca[abba]qrst
