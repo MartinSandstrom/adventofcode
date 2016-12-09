@@ -4,13 +4,8 @@ fs.readFile("../../test-data/day-three.txt", "utf8", function (error, data) {
     if(error) {
         console.log(error);
     }
-    doMagic(data);
-    console.log(numberOfTriangles);
+    console.log(doMagic(data.split(/\r|\n/)));
 });
 
-var numberOfTriangles = 0;
-
-var doMagic = (data) => data.split(/\r|\n/).forEach((row) => isTriangle(row.split(' ').filter(Boolean).sort((a, b) => a - b)) ? numberOfTriangles++ : true);
-
-var isTriangle = (numbers) => parseInt(numbers[0]) + parseInt(numbers[1]) > parseInt(numbers[2]);
-
+var doMagic = data => data.reduce((acc, row) => acc + isTriangle(row.split(' ').filter(Boolean).map(str=>parseInt(str)).sort((a, b) => a - b)), 0);
+var isTriangle = numbers => +(numbers[0] + numbers[1] > numbers[2]);
