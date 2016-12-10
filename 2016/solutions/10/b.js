@@ -22,7 +22,7 @@ var doMagic = (data) => {
             } else if(info[0] === 'bot') {
                 bot = info[1];
                 if(!bots[bot]) bots[bot] = { low: 0, high: 0};
-                if(bots[bot].high !== 0 && bots[bot].low !== 0) {
+                if(bots[bot].high && bots[bot].low) {
                     if(info[5] === 'output') updateOutput(info[6], bots[bot].low);
                     else updateBot(info[6], bots[bot].low);
                     
