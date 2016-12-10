@@ -8,8 +8,6 @@ fs.readFile("../../test-data/day-ten.txt", "utf8", function (error, data) {
 });
 var bots = {};
 var outputs = {};
-var highChip = 61;
-var lowChip = 17;
 
 var doMagic = (data) => {
     
@@ -59,7 +57,7 @@ var updateBot = (bot, value) => {
         bots[bot].low = value;
     }
     
-    if(bots[bot].low == lowChip && bots[bot].high == highChip) {
+    if(bots[bot].low == 17 && bots[bot].high == 61) {
         console.log('HIT bot: ', bot);
     }
 };

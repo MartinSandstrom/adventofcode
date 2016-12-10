@@ -8,8 +8,6 @@ fs.readFile("../../test-data/day-ten.txt", "utf8", function (error, data) {
 });
 var bots = {};
 var outputs = {};
-var highChip = 61;
-var lowChip = 17;
 
 var doMagic = (data) => {
     
