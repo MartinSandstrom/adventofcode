@@ -55,6 +55,16 @@ var doMagic = (data) => {
             }
         });
     }
+    
+    console.log(outputs[0].high * outputs[1].high * outputs[2].high);
+    
+    //console.log(outputs);
+    //console.log('--------');
+    //console.log(output);
+    //console.log('--------');
+    //console.log(bots);
+    //console.log(lines);
+    
 };
 
 var giveBotValue = (bot, value) => {
@@ -77,9 +87,6 @@ var updateBot = (bot, value) => {
         bots[bot].high = value;
     } else if(value > bots[bot].low) {
         bots[bot].low = value;
-    }
-    if(bots[bot].low == lowChip && bots[bot].high == highChip) {
-        console.log('HIT bot: ', bot);
     }
 };
 
