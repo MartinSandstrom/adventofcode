@@ -42,6 +42,7 @@ var doMagic = (data) => {
                     bots[bot].low = 0;
                     bots[bot].high = 0;
                     hasFoundOne = true;
+                    obj.splice(index, 1);
                 }
             }
         });
