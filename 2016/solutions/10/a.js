@@ -8,40 +8,29 @@ fs.readFile("../../test-data/day-ten.txt", "utf8", function (error, data) {
 });
 var bots = {};
 var outputs = {};
-
 var doMagic = (data) => {
     
     var lines = data.split(/\r|\n/);
-    var hasFoundOne = true;
     var bot;
-
-    while (hasFoundOne) {
-        hasFoundOne = false;
+    while (lines.length > 0) {
         lines.forEach((row, index, obj) => {
             var info = row.split(' ');
             if(info[0] === 'value') {
                 bot = info[5];
-                var value = info[1];
                 if(!bots[bot]) bots[bot] = { low: 0, high: 0};
-                updateBot(bot, value);
+                updateBot(bot,  info[1]);
                 obj.splice(index, 1);
-                hasFoundOne = true;
             } else if(info[0] === 'bot') {
-                var numberLow = info[6];
-                var numberHigh = info[11];
                 bot = info[1];
                 if(!bots[bot]) bots[bot] = { low: 0, high: 0};
-                
                 if(bots[bot].high !== 0 && bots[bot].low !== 0) {
-                    if(info[5] === 'output') updateOutput(numberLow, bots[bot].low);
-                    else updateBot(numberLow, bots[bot].low);
+                    if(info[5] === 'output') updateOutput(info[6], bots[bot].low);
+                    else updateBot(info[6], bots[bot].low);
                     
-                    if(info[10] === 'output') updateOutput(numberHigh, bots[bot].high);
-                    else updateBot(numberHigh, bots[bot].high);
+                    if(info[10] === 'output') updateOutput(info[11], bots[bot].high);
+                    else updateBot(info[11], bots[bot].high);
                     
-                    bots[bot].low = 0;
-                    bots[bot].high = 0;
-                    hasFoundOne = true;
+                    bots[bot].low = bots[bot].high = 0;
                     obj.splice(index, 1);
                 }
             }
@@ -58,7 +47,7 @@ var updateBot = (bot, value) => {
         bots[bot].low = value;
     }
     
-    if(bots[bot].low == 17 && bots[bot].high == 61) {
+    if(bots[bot].low === 17 && bots[bot].high === 61) {
         console.log('HIT bot: ', bot);
     }
 };
