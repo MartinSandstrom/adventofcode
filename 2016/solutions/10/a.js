@@ -9,7 +9,6 @@ fs.readFile("../../test-data/day-ten.txt", "utf8", function (error, data) {
 var bots = {};
 var outputs = {};
 var doMagic = (data) => {
-    
     var lines = data.split(/\r|\n/);
     var bot;
     while (lines.length > 0) {
