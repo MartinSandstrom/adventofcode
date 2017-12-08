@@ -9,19 +9,22 @@ fs.readFile("../../test-data/day-six.txt", "utf8", function (error, data) {
 	let intBanks = banks.map((bank) => parseInt(bank));
 	doMagic(intBanks);
 });
-let combinations = new Set();
+let combinations = new Map();
+let last = 0;
 
 let doMagic = (banks) => {
 	let bankCombination = banks.join(',');
 	combinations[bankCombination] = 1;
 	let hasBeenFound = false;
 	while (!hasBeenFound) {
-		let bankCombination = banks.join(',');
+		let bankCombination = banks.join('');
 		if (combinations.has(bankCombination)) {
 			hasBeenFound = true;
-			console.log('We have a match: ', combinations.size);
+			last = bankCombination;
+			console.log('A: We have a match: ', combinations.size);
+			console.log('B: size: ', (combinations.size - combinations.get(last)));
 		}
-		combinations.add(bankCombination);
+		combinations.set(bankCombination, combinations.size);
 		let richestBankIndex = getHighestIndex(banks);
 		let currentIndex = richestBankIndex;
 		let bankBalance = banks[richestBankIndex];
