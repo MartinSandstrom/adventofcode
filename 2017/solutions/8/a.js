@@ -14,17 +14,21 @@ let expressions = {
 	'>=': (a, b) => a >= b,
 	'==': (a, b) => a == b,
 	'!=': (a, b) => a != b,
-	'inc': (a, b) => a += b,
-	'dec': (a, b) => a += b
+	'inc': (a, b) => a + b,
+	'dec': (a, b) => a - b
 };
 
 let doMagic = (data, allObjects) => data.split('\n').filter(Boolean).reduce((val, line) => {
 	let instructions = line.split(' ');
-	allObjects[instructions[0]] ? true : allObjects[instructions[0]] = 0;
-	allObjects[instructions[4]] ? true : allObjects[instructions[4]] = 0;
-	if (expressions[instructions[5]](allObjects[instructions[4]], instructions[6])) {
-		instructions[1] === 'inc' ? allObjects[instructions[0]] += parseInt(instructions[2]) :
-			allObjects[instructions[0]] -= parseInt(instructions[2]);
+	let firstValue = instructions[0];
+	let secondValue = instructions[4];
+	let expression = instructions[5];
+	allObjects[firstValue] = allObjects[firstValue] || 0;
+	allObjects[secondValue] = allObjects[secondValue] || 0;
+	let condition = expressions[expression](allObjects[secondValue], instructions[6]);
+
+	if (condition) {
+		allObjects[firstValue] = expressions[instructions[1]](parseInt(allObjects[firstValue]), parseInt(instructions[2]));
 	}
-	return Math.max(val, allObjects[instructions[0]]);
+	return Math.max(val, allObjects[firstValue])
 }, 0);
