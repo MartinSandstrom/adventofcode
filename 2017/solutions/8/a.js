@@ -4,11 +4,8 @@ fs.readFile("../../test-data/day-eight.txt", "utf8", function (error, data) {
 	if (error) {
 		console.log(error);
 	}
-	let answer = doMagic(data);
+	console.log('ANSWER: ', doMagic(data, {}));
 });
-
-let allObjects = {};
-let highestEver = -9999;
 
 let expressions = {
 	'>': (a, b) => a > b,
@@ -16,35 +13,20 @@ let expressions = {
 	'<=': (a, b) => a <= b,
 	'>=': (a, b) => a >= b,
 	'==': (a, b) => a == b,
-	'!=': (a, b) => a != b
+	'!=': (a, b) => a != b,
+	'inc': (a, b) => a += b,
+	'dec': (a, b) => a += b
 };
 
-let doMagic = (data) => {
-	let array = data.split('\n').filter(Boolean);
-	array.forEach((line) => {
+let doMagic = (data, allObjects) => {
+	return data.split('\n').filter(Boolean).reduce((val, line) => {
 		let instructions = line.split(' ');
-		let firstValue = instructions[0];
-		let isInc = instructions[1] === 'inc';
-		let moreOrLess = instructions[5];
-		let secondValue = instructions[4];
-		if (!allObjects[firstValue]) {
-			allObjects[firstValue] = 0;
+		allObjects[instructions[0]] ? true : allObjects[instructions[0]] = 0;
+		allObjects[instructions[4]] ? true : allObjects[instructions[4]] = 0;
+		if (expressions[instructions[5]](allObjects[instructions[4]], instructions[6])) {
+			instructions[1] === 'inc' ? allObjects[instructions[0]] += parseInt(instructions[2]) :
+				allObjects[instructions[0]] -= parseInt(instructions[2]);
 		}
-		if (!allObjects[secondValue]) {
-			allObjects[secondValue] = 0;
-		}
-		let functionToUse = expressions[moreOrLess];
-		let condition = functionToUse(allObjects[secondValue], instructions[6]);
-		if (condition) {
-			if (isInc) {
-				allObjects[firstValue] += parseInt(instructions[2]);
-			} else {
-				allObjects[firstValue] -= parseInt(instructions[2]);
-			}
-		}
-		let arr = Object.keys(allObjects).map(function (key) { return allObjects[key]; });
-		let max = Math.max.apply( highestEver, arr );
-		highestEver = Math.max(highestEver, max);
-	});
-	console.log(highestEver);
+		return Math.max(val, allObjects[instructions[0]]);
+	}, 0);
 };
