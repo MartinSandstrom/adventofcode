@@ -7,6 +7,7 @@ fs.readFile("../../test-data/day-seven.txt", "utf8", function (error, data) {
 		console.log(error);
 	}
 	let bottom = doMagic(data);
+	console.log('Bottom tower: ', bottom);
 	allTowers = parseData(data);
 	let children = new Set();
 	let weights = {};
