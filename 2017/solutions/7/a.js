@@ -1,5 +1,6 @@
 var fs = require('fs');
 let allTowers = {};
+let weights = {};
 
 fs.readFile("../../test-data/day-seven.txt", "utf8", function (error, data) {
 	if (error) {
@@ -7,41 +8,26 @@ fs.readFile("../../test-data/day-seven.txt", "utf8", function (error, data) {
 	}
 	let bottom = doMagic(data);
 	allTowers = parseData(data);
-	let answer = findImbalance(bottom[0], data);
-	console.log(answer);
+	let children = new Set();
+	let weights = {};
+	findImbalance(allTowers, bottom[0].name);
 });
 
-let findImbalance = (current, data) => {
-	if(!current.hasChildren) {
-		return;
-	}
-	let children = current.children;
-	let allChildrenScores = [];
-	children.forEach( (children) => {
-		let childObject = allTowers.find( (child) => child.name === children);
-		let score = getScoreFromChildren(childObject, data);
-		allChildrenScores.push(score + childObject.number);
-		findImbalance(children, data);
+let findImbalance = (children, root) => {
+	let exp = 0;
+	let s = weights[root];
+	root = children.find( (child) => child.name === root);
+	root.children.forEach( (child) => {
+		let w = findImbalance(children, child);
+		s += w;
+		if(!exp) {
+			exp = w;
+		} else if (exp !== w) {
+			console.log(`expected ${child} to have ${exp} but found ${w}`);
+			console.log(`exp: ${exp} w: ${w}`);
+		}
 	});
-	let set = new Set(allChildrenScores);
-	if(set.size > 1) {
-		children.forEach( (childish) => {
-			let childObject = allTowers.find( (child) => child.name === childish);
-		});
-	}
-}
-
-let getScoreFromChildren = (current, data) => {
-	if(!current.hasChildren) {
-		return current.number;
-	}
-	let children = current.children;
-	let allChildrenScores = [];
-	children.forEach( (children) => {
-		let childObject = allTowers.find( (child) => child.name === children);
-		allChildrenScores.push(childObject.number);
-	});
-	return allChildrenScores.reduce( (val, current) => val + parseInt(current), 0);
+	return s;
 }
 
 let doMagic = data => {
@@ -64,6 +50,7 @@ let parseData = (data) => {
 		let number = parseInt(information[1].substr(1).slice(0, -1));
 		let hasChildren = false;
 		let children = [];
+		weights[name] = number;
 		if (information[2]) {
 			hasChildren = true;
 			for (let i = 3; i < information.length; i++) {
