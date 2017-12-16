@@ -8,6 +8,7 @@ fs.readFile("../../test-data/day-seven.txt", "utf8", function (error, data) {
 	}
 	let bottom = doMagic(data);
 	console.log('Bottom tower: ', bottom);
+	console.log('------------');
 	allTowers = parseData(data);
 	let children = new Set();
 	let weights = {};
@@ -25,7 +26,10 @@ let findImbalance = (children, root) => {
 			exp = w;
 		} else if (exp !== w) {
 			console.log(`expected ${child} to have ${exp} but found ${w}`);
+			let childObj = allTowers.find( (children) => children.name === child);
 			console.log(`exp: ${exp} w: ${w}`);
+			console.log('POSSIBLE ANSWER: ' + parseInt(parseInt(childObj.number) + (parseInt(exp) - parseInt(w))));
+			console.log('------------------');
 		}
 	});
 	return s;
