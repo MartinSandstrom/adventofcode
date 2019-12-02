@@ -13,7 +13,7 @@ const doMagic = input => {
 }
 
 const getTotalFuel = masses => {
-  return masses.reduce( (totalFuel, currentMass) => {
+  return masses.reduce((totalFuel, currentMass) => {
     const fuelToBeAdded = getFuelAndFuelForFuel(currentMass);
     return totalFuel + fuelToBeAdded;
   }, 0);
