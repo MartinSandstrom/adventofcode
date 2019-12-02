@@ -1,19 +1,5 @@
 var fs = require('fs');
 
-
-/*
-
-calculateMass(
-  amountOfFuel = roundDown(mass / 3) - 2
-)
-
-[mass, mass, mass, mass]
-
-forEach mass totalMass+=mass;
-
-
-*/
-
 fs.readFile("./data.txt", "utf8", function (error, data) {
     if(error) {
         console.log(error);
@@ -21,21 +7,16 @@ fs.readFile("./data.txt", "utf8", function (error, data) {
     console.log('answer', doMagic(data));
 });
 
-const doMagic = (input) => {
-
+const doMagic = input => {
   const masses = input.split('\n').filter(Boolean);
 
-  const totalFuel = masses.reduce( (totalFuel, currentMass) => {
+  return masses.reduce((totalFuel, currentMass) => {
     const fuelToBeAdded = getFuelFromMass(currentMass);
     return totalFuel + fuelToBeAdded;
   }, 0);
-
-  return totalFuel;
 }
 
-const getFuelFromMass = (mass) => {
-  return  Math.floor(mass / 3) - 2;;
-}
+const getFuelFromMass = mass => Math.floor(mass / 3) - 2;
 
 
 console.log('FOR: 12 right is 2. MY answer =  ', getFuelFromMass(12));

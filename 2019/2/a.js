@@ -7,7 +7,7 @@ fs.readFile("./data.txt", "utf8", function (error, data) {
     console.log('answer', doMagic(data));
 });
 
-const doMagic = (input) => {
+const doMagic = input => {
   const array = input.split(',').filter(Boolean).map(v => Number(v));
 
   array[1] = 12;
@@ -16,19 +16,17 @@ const doMagic = (input) => {
   return haltTheProgram(array);
 }
 
-const haltTheProgram = (array) => {
+const haltTheProgram = array => {
   for(let i = 0; i < array.length; i = i + 4) {
     if (array[i] === 99) {
       return array[0];
-    } else if (array[i] === 1) {
-      let nextValue = array[i + 1];
-      let nextNextValue = array[i + 2];
-      let nextNextNextValue = array[i + 3];
+    }
+    let nextValue = array[i + 1];
+    let nextNextValue = array[i + 2];
+    let nextNextNextValue = array[i + 3];
+    if (array[i] === 1) {
       array[nextNextNextValue] = array[nextValue] + array[nextNextValue];
     } else if (array[i] === 2 ) {
-      let nextValue = array[i + 1];
-      let nextNextValue = array[i + 2];
-      let nextNextNextValue = array[i + 3];
       array[nextNextNextValue] = array[nextValue] * array[nextNextValue];
     }
   }

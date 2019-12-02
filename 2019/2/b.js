@@ -1,6 +1,5 @@
 var fs = require('fs');
 
-
 fs.readFile("./data.txt", "utf8", function (error, data) {
     if(error) {
         console.log(error);
@@ -8,7 +7,7 @@ fs.readFile("./data.txt", "utf8", function (error, data) {
     console.log('answer', doMagic(data));
 });
 
-const doMagic = (input) => {
+const doMagic = input => {
   let array = input.split(',').filter(Boolean).map(v => Number(v));
 
   for(let noun = 0; noun < 100; noun++) {
@@ -21,28 +20,23 @@ const doMagic = (input) => {
   }
 }
 
-
 const haltWithNewParams = (noun, verb, array) => {
   array[1] = noun;
   array[2] = verb;
-  const result = haltTheProgram(array);
-  return result;
+  return haltTheProgram(array);
 }
 
-
-const haltTheProgram = (array) => {
+const haltTheProgram = array => {
   for(let i = 0; i < array.length; i = i + 4) {
     if (array[i] === 99) {
       return array[0];
-    } else if (array[i] === 1) {
-      let nextValue = array[i + 1];
-      let nextNextValue = array[i + 2];
-      let nextNextNextValue = array[i + 3];
+    }
+    let nextValue = array[i + 1];
+    let nextNextValue = array[i + 2];
+    let nextNextNextValue = array[i + 3];
+    if (array[i] === 1) {
       array[nextNextNextValue] = array[nextValue] + array[nextNextValue];
     } else if (array[i] === 2 ) {
-      let nextValue = array[i + 1];
-      let nextNextValue = array[i + 2];
-      let nextNextNextValue = array[i + 3];
       array[nextNextNextValue] = array[nextValue] * array[nextNextValue];
     }
   }
