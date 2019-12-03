@@ -30,9 +30,10 @@ const getShostestPath = (firstWire, secondWire) => {
 const placeWire = (array, visitedMap, isFirstWire) => {
   let x = 0;
   let y = 0;
-  array.split(',').forEach(i => {
-    const direction = i.slice(0, 1);
-    let numberOfSteps = i.slice(1, i.length);
+  const instructions = array.split(',');
+  instructions.forEach(instruction => {
+    const direction = instruction.slice(0, 1);
+    let numberOfSteps = instruction.slice(1, instruction.length);
     while (numberOfSteps > 0) {
       if (direction === 'U') y++;
       if (direction === 'D') y--;
