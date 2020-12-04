@@ -14,11 +14,7 @@ console.log(
       .reduce(
         ({ rightPosition, trees }, currentRow, index) => ({
           rightPosition: rightPosition + right,
-          trees:
-            index % down === 0 &&
-            currentRow.repeat(rightPosition)[rightPosition] === "#"
-              ? trees + 1
-              : trees,
+          trees: index % down === 0 && currentRow.repeat(rightPosition)[rightPosition] === "#" ? trees + 1 : trees,
         }),
         { rightPosition: 0, trees: 0 }
       ).trees;

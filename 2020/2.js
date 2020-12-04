@@ -4,7 +4,6 @@ console.log(
   document
     .querySelector("pre")
     .textContent.split("\n")
-    .map((r) => {
     .filter(Boolean)
       const [,min, max, letter, password] = /(\d+)-(\d+) ([a-z]): ([a-z]+)/g.exec(r);
       return {
