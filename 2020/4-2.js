@@ -5,14 +5,9 @@ var isValidObject = {
   hgt: (value) =>
     (value.includes("cm") && +value.split("cm")[0] >= 150 && +value.split("cm")[0] <= 193) ||
     (value.includes("in") && +value.split("in")[0] >= 59 && +value.split("in")[0] <= 76),
-  hcl: (value) =>
-    value[0] === "#" &&
-    value
-      .split("#")[1]
-      .split("")
-      .every((v) => ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f"].some((c) => c.includes(v))),
-  ecl: (value) => ["amb", "blu", "brn", "gry", "grn", "hzl", "oth"].some((v) => value === v),
-  pid: (value) => value.split("").length === 9 && value.split("").every((v) => "0123456789".includes(v)),
+  hcl: (value) => RegExp("^#[a-f-f0-9]{6}").test(value),
+  ecl: (value) => new Set(["amb", "blu", "brn", "gry", "grn", "hzl", "oth"]).has(value),
+  pid: (value) => RegExp("^[0-9]{9}$").test(value),
 };
 
 console.log(
