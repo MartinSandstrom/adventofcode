@@ -1,25 +1,14 @@
-var calculateSeat = (b) => {
-  const { rowMin, seatMin } = [...b].reduce(
-    ({ rowMin, rowMax, seatMin, seatMax }, char) => ({
-      rowMax: char === "F" ? rowMax - Math.ceil((rowMax - rowMin) / 2) : rowMax,
-      rowMin: char === "B" ? rowMin + Math.ceil((rowMax - rowMin) / 2) : rowMin,
-      seatMax: char === "L" ? seatMax - Math.ceil((seatMax - seatMin) / 2) : seatMax,
-      seatMin: char === "R" ? seatMin + Math.ceil((seatMax - seatMin) / 2) : seatMin,
-    }),
-    {
-      rowMin: 0,
-      rowMax: 127,
-      seatMin: 0,
-      seatMax: 7,
-    }
-  );
-  return rowMin * 8 + seatMin;
-};
-
 console.log(
   "RESULT: ",
   document
     .querySelector("pre")
     .textContent.split("\n")
-    .reduce((highestSeatId, binarySpacePartitioning) => Math.max(calculateSeat(binarySpacePartitioning), highestSeatId), 0)
+    .filter(Boolean)
+    .map((string) => /([FB]{7})([RL]{3})/.exec(string))
+    .map((something) => ({
+      row: something[1].replace(/F/g, "0").replace(/B/g, "1"),
+      col: something[2].replace(/L/g, "0").replace(/R/g, "1"),
+    }))
+    .map(({ row, col }) => parseInt(row, 2) * 8 + parseInt(col, 2))
+    .reduce((highestSeatId, seatId) => Math.max(seatId, highestSeatId), 0)
 );

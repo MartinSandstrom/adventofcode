@@ -23,6 +23,6 @@ var allSeats = document
 
 for (var i = 100; i <= 800; i++) {
   if (!allSeats.has(i)) {
-    console.log("Number", i);
+    console.log("Your seat", i);
   }
 }
