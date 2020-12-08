@@ -3,8 +3,8 @@ var findRecursiveCount = (rows, index, allSeen, count) => {
     console.log("Seen twice", count);
     return;
   }
-  var [instruction, value] = rows[index].split(" ");
   allSeen.add(index);
+  var [instruction, value] = rows[index].split(" ");
   findRecursiveCount(
     rows,
     instruction === "jmp" ? index + eval(value) : ++index,
