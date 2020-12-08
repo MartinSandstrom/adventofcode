@@ -12,4 +12,6 @@ var findRecursiveCount = (rows, index, allSeen, count) => {
     instruction === "acc" ? count + eval(value) : count
   );
 };
-findRecursiveCount(document.querySelector("pre").textContent.split("\n").filter(Boolean), 0, new Set(), 0);
+
+var rows = document.querySelector("pre").textContent.split("\n").filter(Boolean);
+findRecursiveCount(rows, 0, new Set(), 0);
