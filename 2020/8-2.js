@@ -620,11 +620,13 @@ var findRecursiveCount = (rows, index, allSeen, count) => {
     return;
   } else if (allSeen.has(index)) return;
   var [instruction, value] = rows[index].split(" ");
-
   allSeen.add(index);
-  if (instruction === "nop") findRecursiveCount(rows, ++index, allSeen, count);
-  else if (instruction === "acc") findRecursiveCount(rows, ++index, allSeen, count + eval(value));
-  else if (instruction === "jmp") findRecursiveCount(rows, index + eval(value), allSeen, count);
+  findRecursiveCount(
+    rows,
+    instruction === "jmp" ? index + eval(value) : ++index,
+    allSeen,
+    instruction === "acc" ? count + eval(value) : count
+  );
 };
 
 var allExamples = [];
