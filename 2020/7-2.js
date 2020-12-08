@@ -1,10 +1,9 @@
-var rows = document.querySelector("pre").textContent.split("\n");
+var rows = document.querySelector("pre").textContent.split(".\n");
 
 var countRecursive = (row, array) => {
-  if (row.includes("contain no other bags")) {
-    return 0;
-  }
-  const allItems = row.split("contain ")[1].replace(".", "");
+  if (row.includes("contain no other bags")) return 0;
+
+  const allItems = row.split("contain ")[1];
   const test = allItems.split(", ");
   var count = test.reduce((acc, curr) => {
     const [number, ...rest] = curr.split(" ");
