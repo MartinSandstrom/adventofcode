@@ -11,11 +11,11 @@ fs.readFile("./pussel.txt", "utf8", function (error, data) {
 
 const hasPairEqualTo = (array, sum, seen) =>
   array.filter((n) => {
-    const has = seen.has(+sum - +n);
-    if (!has) {
+    const hasBrother = seen.has(+sum - +n);
+    if (!hasBrother) {
       seen.add(+n);
     }
-    return has;
+    return hasBrother;
   }).length > 0;
 
 const solvePartOne = (array, preamble) => {
@@ -27,28 +27,32 @@ const solvePartOne = (array, preamble) => {
   }
 };
 
-const findInPrev = (array, prevCurr, number) => {
+const findInPrev = (array, number) => {
   var count = 0;
   for (let i = array.length - 1; i > 0; i--) {
-    var curr = +array[i];
-    count += curr;
+    count += +array[i];
+    if (count > number) {
+      return false;
+    }
     if (count === number) {
       var array = [...array].slice(i);
       var sorted = array.map((a) => +a).sort((a, b) => a - b);
       console.log("Number: ", sorted.pop() + sorted.shift());
+      return true;
     }
   }
+  return false;
 };
 
 const solvePartTwo = (array, number) => {
   for (let i = 0; i < array.length; i++) {
-    const curr = array[i];
     const prev = [...array].slice(0, i + 1);
-    findInPrev(prev, curr, number);
+    if (findInPrev(prev, number)) {
+      return;
+    }
   }
 };
 
 const example = [35, 20, 15, 25, 47, 40, 62, 55, 65, 95, 102, 117, 150, 182, 127, 219, 299, 277, 309, 576];
-
 solvePartOne(example, 5);
 solvePartTwo(example, 127);
