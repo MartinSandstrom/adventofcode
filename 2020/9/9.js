@@ -9,23 +9,19 @@ fs.readFile("./pussel.txt", "utf8", function (error, data) {
   solvePartTwo(all, 167829540);
 });
 
-const hasPairEqualTo = (array, sum) => {
-  const seen = new Set();
-  return (
-    array.filter((n) => {
-      const has = seen.has(+sum - +n);
-      if (!has) {
-        seen.add(+n);
-      }
-      return has;
-    }).length > 0
-  );
-};
+const hasPairEqualTo = (array, sum, seen) =>
+  array.filter((n) => {
+    const has = seen.has(+sum - +n);
+    if (!has) {
+      seen.add(+n);
+    }
+    return has;
+  }).length > 0;
 
 const solvePartOne = (array, preamble) => {
   for (let i = preamble; i < array.length; i++) {
     const previousFromPremble = [...array].slice(i - preamble, i);
-    if (!hasPairEqualTo(previousFromPremble, array[i])) {
+    if (!hasPairEqualTo(previousFromPremble, array[i], new Set())) {
       console.log("Found ya", array[i]);
     }
   }
