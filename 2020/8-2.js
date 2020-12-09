@@ -634,10 +634,11 @@ allInstructions.forEach((e, index) => {
   const newCopy = [...allInstructions];
   if (newCopy[index].includes("nop")) {
     newCopy[index] = newCopy[index].replace("nop", "jmp");
+    allExamples.push(newCopy);
   } else if (newCopy[index].includes("jmp")) {
     newCopy[index] = newCopy[index].replace("jmp", "nop");
+    allExamples.push(newCopy);
   }
-  allExamples.push(newCopy);
 });
 
 allExamples.forEach((e) => findRecursiveCount(e, 0, new Set(), 0));
