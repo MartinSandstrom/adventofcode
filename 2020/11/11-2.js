@@ -5,7 +5,7 @@ fs.readFile("./pussel.txt", "utf8", function (error, data) {
     console.log(error);
   }
   const all = data.split("\n");
-  // solvePartTwo(all);
+  solvePartTwo(all);
 });
 
 const isAdjacent = (cordination, maxY, maxX, array, char) => {
@@ -14,16 +14,16 @@ const isAdjacent = (cordination, maxY, maxX, array, char) => {
 
 const countByCondition = (array, maxX, maxY, x, y, condition) => {
   var numberOfOccupiedAdjacent = 0;
-  for (let count = 1; count <= Math.max(maxX, maxY); count++) {
+  for (let count = 1; count <= 100; count++) {
     let cordination = condition(count);
     if (isAdjacent(cordination, maxY, maxX, array, "#")) {
-      numberOfOccupiedAdjacent++;
+      return 1;
     }
     if (isAdjacent(cordination, maxY, maxX, array, "L")) {
-      return numberOfOccupiedAdjacent;
+      return 0;
     }
   }
-  return numberOfOccupiedAdjacent;
+  return 0;
 };
 
 const getNumberOfAdjacent = (array, maxX, maxY, x, y) => {
@@ -47,7 +47,9 @@ const solvePartTwo = (array) => {
   var doesMove = true;
 
   array = array.map((row) => row.split(""));
+  var count = 0;
   while (doesMove) {
+    count++;
     doesMove = false;
     var newArray = [...array.map((a) => [...a])];
     for (let y = 0; y < maxY; y++) {
@@ -55,7 +57,6 @@ const solvePartTwo = (array) => {
       for (let x = 0; x < maxX; x++) {
         let columnPosition = row[x];
         let numberOfOccupiedAdjacent = getNumberOfAdjacent(array, maxX, maxY, x, y);
-
         if (columnPosition === "#") {
           if (numberOfOccupiedAdjacent >= 5) {
             newArray[y][x] = "L";
@@ -76,7 +77,6 @@ const solvePartTwo = (array) => {
       }
     }
     array = [...newArray];
-    console.log(array);
   }
   var allFiltered = array
     .flat()
