@@ -19,9 +19,6 @@ const countByCondition = (array, maxX, maxY, x, y, condition) => {
     if (isAdjacent(cordination, maxY, maxX, array, "#")) {
       numberOfOccupiedAdjacent++;
     }
-    if (isAdjacent(cordination, maxY, maxX, array, "L")) {
-      return numberOfOccupiedAdjacent;
-    }
   }
   return numberOfOccupiedAdjacent;
 };
