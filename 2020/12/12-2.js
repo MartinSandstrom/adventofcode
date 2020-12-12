@@ -9,36 +9,39 @@ fs.readFile("./pussel.txt", "utf8", function (error, data) {
 });
 
 const solvePartOne = (array) => {
-  var x = 0;
-  var y = 0;
-  var wayPointX = 10;
-  var wayPointY = 1;
-  array.forEach((instruction) => {
-    var char = instruction[0];
-    var number = +instruction.split(char)[1];
-    if (char === "L") {
-      var count = number / 90;
-      for (let i = 0; i < count; i++) {
-        var temp = wayPointY;
-        wayPointY = wayPointX;
-        wayPointX = temp * -1;
+  const { x, y } = array.reduce(
+    ({ x, y, wayPointX, wayPointY }, instruction) => {
+      var char = instruction[0];
+      var number = +instruction.split(char)[1];
+      if (char === "L") {
+        for (let i = 0; i < number / 90; i++) {
+          var temp = wayPointY;
+          wayPointY = wayPointX;
+          wayPointX = temp * -1;
+        }
+      } else if (char === "R") {
+        for (let i = 0; i < number / 90; i++) {
+          var temp = wayPointX;
+          wayPointX = wayPointY;
+          wayPointY = temp * -1;
+        }
+      } else if (char === "N") wayPointY += number;
+      else if (char === "S") wayPointY -= number;
+      else if (char === "E") wayPointX += number;
+      else if (char === "W") wayPointX -= number;
+      else if (char === "F") {
+        x += number * wayPointX;
+        y += number * wayPointY;
       }
-    } else if (char === "R") {
-      var count = number / 90;
-      for (let i = 0; i < count; i++) {
-        var temp = wayPointX;
-        wayPointX = wayPointY;
-        wayPointY = temp * -1;
-      }
-    } else if (char === "N") wayPointY += number;
-    else if (char === "S") wayPointY -= number;
-    else if (char === "E") wayPointX += number;
-    else if (char === "W") wayPointX -= number;
-    else if (char === "F") {
-      x += number * wayPointX;
-      y += number * wayPointY;
-    }
-  });
+      return {
+        x,
+        y,
+        wayPointX,
+        wayPointY,
+      };
+    },
+    { x: 0, y: 0, wayPointX: 10, wayPointY: 1 }
+  );
   console.log("RESULT: ", Math.abs(x) + Math.abs(y));
 };
 
