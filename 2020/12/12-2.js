@@ -5,10 +5,10 @@ fs.readFile("./pussel.txt", "utf8", function (error, data) {
     console.log(error);
   }
   const all = data.split("\n").filter(Boolean);
-  solvePartOne(all);
+  solvePartTwo(all);
 });
 
-const solvePartOne = (array) => {
+const solvePartTwo = (array) => {
   const { x, y } = array.reduce(
     ({ x, y, wayPointX, wayPointY }, instruction) => {
       var char = instruction[0];
@@ -47,4 +47,4 @@ const solvePartOne = (array) => {
 
 const example = ["F10", "N3", "F7", "R90", "F11"];
 
-solvePartOne(example);
+solvePartTwo(example);
