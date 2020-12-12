@@ -8,17 +8,17 @@ fs.readFile("./pussel.txt", "utf8", function (error, data) {
   solvePartTwo(all);
 });
 
-const isAdjacent = (cordination, maxY, maxX, array, char) => {
+const isValidAndChar = (cordination, maxY, maxX, array, char) => {
   return !(cordination.y < 0 || cordination.y >= maxY || cordination.x < 0 || cordination.x >= maxX) && array[cordination.y][cordination.x] === char;
 };
 
-const hasAdjacent = (array, maxX, maxY, x, y, condition) => {
+const hasAdjacentByCondition = (array, maxX, maxY, x, y, condition) => {
   for (let count = 1; count <= maxY; count++) {
     let cordination = condition(count);
-    if (isAdjacent(cordination, maxY, maxX, array, "#")) {
+    if (isValidAndChar(cordination, maxY, maxX, array, "#")) {
       return 1;
     }
-    if (isAdjacent(cordination, maxY, maxX, array, "L")) {
+    if (isValidAndChar(cordination, maxY, maxX, array, "L")) {
       return 0;
     }
   }
@@ -26,14 +26,14 @@ const hasAdjacent = (array, maxX, maxY, x, y, condition) => {
 };
 
 const getNumberOfAdjacent = (array, maxX, maxY, x, y) => {
-  var leftUp = hasAdjacent(array, maxX, maxY, x, y, (count) => ({ y: y - count, x: x - count }));
-  var up = hasAdjacent(array, maxX, maxY, x, y, (count) => ({ y: y - count, x }));
-  var rightUp = hasAdjacent(array, maxX, maxY, x, y, (count) => ({ y: y - count, x: x + count }));
-  var left = hasAdjacent(array, maxX, maxY, x, y, (count) => ({ y, x: x - count }));
-  var right = hasAdjacent(array, maxX, maxY, x, y, (count) => ({ y, x: x + count }));
-  var leftDown = hasAdjacent(array, maxX, maxY, x, y, (count) => ({ y: y + count, x: x - count }));
-  var rightDown = hasAdjacent(array, maxX, maxY, x, y, (count) => ({ y: y + count, x: x + count }));
-  var down = hasAdjacent(array, maxX, maxY, x, y, (count) => ({ y: y + count, x }));
+  var leftUp = hasAdjacentByCondition(array, maxX, maxY, x, y, (count) => ({ y: y - count, x: x - count }));
+  var up = hasAdjacentByCondition(array, maxX, maxY, x, y, (count) => ({ y: y - count, x }));
+  var rightUp = hasAdjacentByCondition(array, maxX, maxY, x, y, (count) => ({ y: y - count, x: x + count }));
+  var left = hasAdjacentByCondition(array, maxX, maxY, x, y, (count) => ({ y, x: x - count }));
+  var right = hasAdjacentByCondition(array, maxX, maxY, x, y, (count) => ({ y, x: x + count }));
+  var leftDown = hasAdjacentByCondition(array, maxX, maxY, x, y, (count) => ({ y: y + count, x: x - count }));
+  var rightDown = hasAdjacentByCondition(array, maxX, maxY, x, y, (count) => ({ y: y + count, x: x + count }));
+  var down = hasAdjacentByCondition(array, maxX, maxY, x, y, (count) => ({ y: y + count, x }));
   return leftUp + up + rightUp + left + right + leftDown + down + rightDown;
 };
 
