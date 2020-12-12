@@ -14,7 +14,7 @@ const replaceForwardWithDirection = (array, facing) =>
     var number = +instruction.split(char)[1];
     var numberOfTurns = number / 90;
     if (char === "F") {
-      fixedArray.push(instruction.replace("F", facing));
+      fixedArray.push({ facing, number });
     } else if (char === "R") {
       while (numberOfTurns--) {
         if (facing === "N") facing = "E";
@@ -30,23 +30,18 @@ const replaceForwardWithDirection = (array, facing) =>
         else if (facing === "E") facing = "N";
       }
     } else {
-      fixedArray.push(instruction);
+      fixedArray.push({ facing: char, number });
     }
-
     return fixedArray;
   }, []);
 
 const solvePartOne = (array) => {
   var fixedArray = replaceForwardWithDirection(array, "E");
   const { x, y } = fixedArray.reduce(
-    ({ x, y }, instruction) => {
-      var char = instruction[0];
-      var number = +instruction.split(char)[1];
-      return {
-        x: char === "E" ? x + number : char === "W" ? x - number : x,
-        y: char === "N" ? y + number : char === "S" ? y - number : y,
-      };
-    },
+    ({ x, y }, { facing, number }) => ({
+      x: facing === "E" ? x + number : facing === "W" ? x - number : x,
+      y: facing === "N" ? y + number : facing === "S" ? y - number : y,
+    }),
     { x: 0, y: 0 }
   );
   console.log("RESULT: ", Math.abs(x) + Math.abs(y));
