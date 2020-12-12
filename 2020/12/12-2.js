@@ -13,14 +13,15 @@ const solvePartTwo = (array) => {
     ({ x, y, wayPointX, wayPointY }, instruction) => {
       var char = instruction[0];
       var number = +instruction.split(char)[1];
+      var numberOfTurns = number / 90;
       if (char === "L") {
-        for (let i = 0; i < number / 90; i++) {
+        while (numberOfTurns--) {
           var temp = wayPointY;
           wayPointY = wayPointX;
           wayPointX = temp * -1;
         }
       } else if (char === "R") {
-        for (let i = 0; i < number / 90; i++) {
+        while (numberOfTurns--) {
           var temp = wayPointX;
           wayPointX = wayPointY;
           wayPointY = temp * -1;

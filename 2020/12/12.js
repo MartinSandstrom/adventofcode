@@ -8,59 +8,48 @@ fs.readFile("./pussel.txt", "utf8", function (error, data) {
   solvePartOne(all);
 });
 
-const solvePartOne = (array) => {
-  var x = 0;
-  var y = 0;
-  var facing = "E";
-  array.forEach((instruction) => {
+const replaceForwardWithDirection = (array, facing) => {
+  return array.reduce((newArray, instruction) => {
     var char = instruction[0];
     var number = +instruction.split(char)[1];
-    if (char === "L") {
-      var count = number / 90;
-      for (let i = 0; i < count; i++) {
-        if (facing === "N") {
-          facing = "W";
-        } else if (facing === "S") {
-          facing = "E";
-        } else if (facing === "E") {
-          facing = "N";
-        } else if (facing === "W") {
-          facing = "S";
+    var numberOfTurns = number / 90;
+    if (char === "F") {
+      newArray.push(instruction.replace("F", facing));
+    } else {
+      if (char === "R") {
+        while (numberOfTurns--) {
+          if (facing === "N") facing = "E";
+          else if (facing === "E") facing = "S";
+          else if (facing === "S") facing = "W";
+          else if (facing === "W") facing = "N";
+        }
+      } else if (char === "L") {
+        while (numberOfTurns--) {
+          if (facing === "N") facing = "W";
+          else if (facing === "W") facing = "S";
+          else if (facing === "S") facing = "E";
+          else if (facing === "E") facing = "N";
         }
       }
-    } else if (char === "R") {
-      var count = number / 90;
-      for (let i = 0; i < count; i++) {
-        if (facing === "N") {
-          facing = "E";
-        } else if (facing === "S") {
-          facing = "W";
-        } else if (facing === "E") {
-          facing = "S";
-        } else if (facing === "W") {
-          facing = "N";
-        }
-      }
-    } else if (char === "N") {
-      y += number;
-    } else if (char === "S") {
-      y -= number;
-    } else if (char === "E") {
-      x += number;
-    } else if (char === "W") {
-      x -= number;
-    } else if (char === "F") {
-      if (facing === "N") {
-        y += number;
-      } else if (facing === "S") {
-        y -= number;
-      } else if (facing === "E") {
-        x += number;
-      } else if (facing === "W") {
-        x -= number;
-      }
+      newArray.push(instruction);
     }
-  });
+    return newArray;
+  }, []);
+};
+
+const solvePartOne = (array) => {
+  var fixedArray = replaceForwardWithDirection(array, "E");
+  const { x, y } = fixedArray.reduce(
+    ({ x, y }, instruction) => {
+      var char = instruction[0];
+      var number = +instruction.split(char)[1];
+      return {
+        x: char === "E" ? x + number : char === "W" ? x - number : x,
+        y: char === "N" ? y + number : char === "S" ? y - number : y,
+      };
+    },
+    { x: 0, y: 0 }
+  );
   console.log("RESULT: ", Math.abs(x) + Math.abs(y));
 };
 
