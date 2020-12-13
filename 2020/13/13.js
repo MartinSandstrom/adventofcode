@@ -7,21 +7,16 @@ var exSchedule = "7,13,x,x,59,x,31,19";
 
 const solvePartOne = (bussSchedule, earliest) => {
   const allBusses = bussSchedule.split(",").filter(Number);
-  console.log(allBusses);
-  for (let i = earliest; i < earliest * 10; i++) {
-    var found = false;
+  var found = false;
+  var count = earliest;
+  while (!found) {
     allBusses.forEach((buss) => {
-      if (i % buss === 0) {
-        console.log("Buss:", buss);
-        console.log("I:", i);
-        console.log("Diff", i - earliest);
-        console.log("Answer:", buss * (i - earliest));
+      if (count % buss === 0) {
+        console.log("Answer:", buss * (count - earliest));
         found = true;
       }
     });
-    if (found) {
-      return;
-    }
+    count++;
   }
 };
 
