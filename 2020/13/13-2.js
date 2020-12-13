@@ -31,7 +31,7 @@ const solvePartTwo = (schedule) => {
 };
 
 solvePartTwo(a);
-//solvePartTwo(b);
-//solvePartTwo(c);
-//solvePartTwo(exSchedule);
+solvePartTwo(b);
+solvePartTwo(c);
+solvePartTwo(exSchedule);
 solvePartTwo(bussSchedule);
