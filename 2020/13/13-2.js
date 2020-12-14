@@ -15,7 +15,6 @@ const parseSchedule = (schedule) => {
 
 const solvePartTwo = (schedule) => {
   var parsed = parseSchedule(schedule);
-
   const { count } = parsed.reduce(
     ({ count, commonDiliminator }, { bussId, offSet }) => {
       while ((count + offSet) % bussId !== 0) count += commonDiliminator;
