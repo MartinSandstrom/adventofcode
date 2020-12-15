@@ -4,6 +4,7 @@ fs.readFile("./pussel.txt", "utf8", function (error, data) {
   if (error) {
     console.log(error);
   }
+  console.time("dbsave");
   const all = data.split("\nmask = ").filter(Boolean);
   solvePartTwo(all);
 });
@@ -12,7 +13,6 @@ var example = ["mask = 000000000000000000000000000000X1001X\nmem[42] = 100", "ma
 
 const getAllMasks = (mask) => {
   if (!mask.includes("X")) return mask;
-
   return [getAllMasks(mask.replace("X", "0")), getAllMasks(mask.replace("X", "1"))].flat();
 };
 
@@ -48,8 +48,9 @@ const solvePartTwo = (instructions) => {
     sum = sum + value;
   }
   console.log("SUM", sum);
+  console.timeEnd("dbsave");
 };
 
-solvePartTwo(example);
+//solvePartTwo(example);
 
 // not 3054650100515
