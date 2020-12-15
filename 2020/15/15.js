@@ -11,18 +11,22 @@ const solvePartOneAndTwo = (array) => {
     turn++;
     if (map.get(lastSpoken).length === 1) {
       lastSpoken = 0;
-      var n = map.has(0) ? [map.get(0).pop(), turn] : [turn];
-      map.set(0, n);
+      setNext(0, map, turn);
     } else {
       const val = map.get(lastSpoken);
       const diff = val[1] - val[0];
       lastSpoken = diff;
-      var n = map.has(diff) ? [map.get(diff).pop(), turn] : [turn];
-      map.set(diff, n);
+      setNext(diff, map, turn);
     }
   }
   console.log(lastSpoken);
 };
 
-solvePartOneAndTwo(example.split(",").map(Number));
+const setNext = (number, map, turn) => {
+  var toSet = map.has(number) ? [map.get(number).pop(), turn] : [turn];
+  map.set(number, toSet);
+};
+
+console.time("solvePartOneAndTwo");
 solvePartOneAndTwo(pussel.split(",").map(Number));
+console.timeEnd("solvePartOneAndTwo");
