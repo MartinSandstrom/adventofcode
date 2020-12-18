@@ -20,13 +20,10 @@ const calcInOrder = (inputString) => {
   const parts = inputString.split(" ");
   let res = +parts[0];
   for (let i = 1; i < parts.length; i += 2) {
-    switch (parts[i]) {
-      case "+":
-        res += +parts[i + 1];
-        break;
-      case "*":
-        res *= +parts[i + 1];
-        break;
+    if (parts[i] === "+") {
+      res += +parts[i + 1];
+    } else if (parts[i] === "*") {
+      res *= +parts[i + 1];
     }
   }
   return res;
