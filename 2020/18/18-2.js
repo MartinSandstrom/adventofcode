@@ -7,7 +7,7 @@ fs.readFile("./pussel.txt", "utf8", function (error, data) {
   console.time("dbsave");
   const all = data.split("\n").filter(Boolean);
 
-  solvePartOne(all);
+  solvePartTwo(all);
 });
 
 const exampleOne = ["1 + 2 * 3 + 4 * 5 + 6"];
@@ -37,23 +37,23 @@ const calcRecursivly = (inputRow) => {
       closeCount++;
       if (openCount === closeCount) {
         var expression = inputRow.slice(openIndex, i + 1);
-        var spliced = expression.slice(1, expression.length - 1);
-        var next = inputRow.replace(expression, calcRecursivly(spliced));
+        var withParentheses = expression.slice(1, expression.length - 1);
+        var next = inputRow.replace(expression, calcRecursivly(withParentheses));
         return calcRecursivly(next);
       }
     }
   }
 };
 
-const solvePartOne = (array) => console.log(array.reduce((a, b) => (a += +calcRecursivly(b)), 0));
+const solvePartTwo = (array) => console.log(array.reduce((a, b) => (a += calcRecursivly(b)), 0));
 
-solvePartOne(exampleOne);
+solvePartTwo(exampleOne);
 console.log("CORRECT: ", 231);
-solvePartOne(exampleTwo);
+solvePartTwo(exampleTwo);
 console.log("CORRECT: ", 51);
-solvePartOne(exampleThree);
+solvePartTwo(exampleThree);
 console.log("CORRECT: ", 46);
-solvePartOne(exampleFour);
+solvePartTwo(exampleFour);
 console.log("CORRECT: ", 1445);
-solvePartOne(exampleFive);
+solvePartTwo(exampleFive);
 console.log("CORRECT: ", 669060);
