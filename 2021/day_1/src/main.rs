@@ -1,13 +1,13 @@
 use std::fs;
 
-fn part_one(data: Vec<u32>) {
+fn part_one(data: &Vec<u32>) {
     let count = data.windows(2)
         .filter(|w| w[1] > w[0])
         .count();
     println!("Part one: {}", count);
 }
 
-fn part_two(data: Vec<u32>) {
+fn part_two(data: &Vec<u32>) {
     let count = data.windows(4)
         .filter(|w| w[3] > w[0])
         .count();
@@ -21,6 +21,6 @@ fn main() {
         .map(|line| line.parse::<u32>().unwrap())
         .collect();
 
-    part_one(data.clone());
-    part_two(data.clone());
+    part_one(&data);
+    part_two(&data);
 }
