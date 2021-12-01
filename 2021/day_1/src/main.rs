@@ -1,20 +1,29 @@
 use std::fs;
 
+fn part_one(data: Vec<i32>) {
+    let mut count = 0;
+    for tuple in data.windows(2) {
+        if tuple[0] < tuple[1] {
+            count += 1;
+        }
+    }
+
+    println!("{}", count);
+}
+
+fn part_two() {
+    let mut count = 0;
+    println!("{}", count);
+}
 
 fn main() {
     let contents = fs::read_to_string("./puzzle.txt").expect("Unable to open");
-    let depths: Vec<_> = contents
+    let data: Vec<_> = contents
         .trim()
         .split('\n')
         .map(|line| line.parse::<i32>().unwrap())
         .collect();
 
-        let mut ans = 0;
-        for tuple in depths.windows(2) {
-            if tuple[0] < tuple[1] {
-                ans += 1;
-            }
-        }
-    
-        println!("{}", ans);
+    part_one(data);
+    part_two();
 }
