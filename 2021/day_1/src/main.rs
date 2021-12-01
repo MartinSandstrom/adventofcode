@@ -1,6 +1,5 @@
 use std::fs;
 
-
 fn part_one(data: Vec<u32>) {
     let count = data.windows(2)
         .filter(|w| w[1] > w[0])
