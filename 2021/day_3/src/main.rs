@@ -28,18 +28,13 @@ fn part_two(data: &Vec<Vec<char>>) {
 
     for i in 0..len {
         let number_of_one = oxygen_data.iter().filter(|line| line[i] == '1').count();
+        let filter_one = |line: &&Vec<char>| line[i] == '1';
+        let filter_zero = |line: &&Vec<char>| line[i] == '0';
+
         if number_of_one >= oxygen_data.len() - number_of_one {
-            oxygen_data = oxygen_data
-                .iter()
-                .filter(|line| line[i] == '1')
-                .cloned()
-                .collect();
+            oxygen_data = oxygen_data.iter().filter(filter_one).cloned().collect();
         } else {
-            oxygen_data = oxygen_data
-                .iter()
-                .filter(|line| line[i] == '0')
-                .cloned()
-                .collect();
+            oxygen_data = oxygen_data.iter().filter(filter_zero).cloned().collect();
         }
 
         let number_of_zero = co2_data.iter().filter(|line| line[i] == '0').count();
@@ -63,7 +58,7 @@ fn part_two(data: &Vec<Vec<char>>) {
     let oxygen_value: i64 = i64::from_str_radix(&String::from_iter(&oxygen_data[0]), 2).unwrap();
     let co2_value: i64 = i64::from_str_radix(&String::from_iter(&co2_data[0]), 2).unwrap();
 
-    println!("Part Two {}", oxygen_value * co2_value);
+    println!("Part Two 2372923 {}", oxygen_value * co2_value);
 }
 
 fn main() {
