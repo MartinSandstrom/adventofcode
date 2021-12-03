@@ -2,38 +2,35 @@ use std::fs;
 
 
 fn part_one(data: &Vec<&str>) {
-    let mut most_common = String::from("");
-    let mut least_common = String::from("");
+    let mut gamma = String::from("");
+    let mut epsilon = String::from("");
+    let len = data[0].chars().count();
 
-    for i in 0..12 {
+    for i in 0..len {
         let total = data.len();
-        let number_of_one = data.iter().filter(|line| line.chars().nth(i).unwrap() == '1').count();
-
-        if number_of_one > total / 2 {
-            most_common.push('1');
-            least_common.push('0');
+        let number_of_gamma = data.iter().filter(|line| line.chars().nth(i).unwrap() == '1').count();
+        if number_of_gamma > total / 2 {
+            gamma.push('1');
+            epsilon.push('0');
         } else {
-            most_common.push('0');
-            least_common.push('1');
+            gamma.push('0');
+            epsilon.push('1');
         }
     }
-
-    println!("Most common {:?}", most_common);
-    println!("Least common {:?}", least_common);
+    let gamma_value = i64::from_str_radix(&gamma, 2);
+    let epsilon_value = i64::from_str_radix(&epsilon, 2);
     
-    let z = i64::from_str_radix(&most_common, 2);
-    let y = i64::from_str_radix(&least_common, 2);
-    
-    println!("Part one 749376");
-    println!("Part one {}", y.unwrap() * z.unwrap());
+    println!("Part one {}", gamma_value.unwrap() * epsilon_value.unwrap());
 }
 
 fn part_two(data: &Vec<&str>) {
     
     let mut oxygen_data = data.clone();
     let mut co2_data = data.clone();
+    let len = data[0].chars().count();
+
     
-    for i in 0..12 {
+    for i in 0..len {
         let mut number_of_zero = 0;
         let mut number_of_one = 0;
         for line in oxygen_data.iter() {
