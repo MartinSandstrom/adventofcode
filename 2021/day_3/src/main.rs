@@ -19,44 +19,33 @@ fn part_one(data: &Vec<&str>) {
     }
     let gamma_value = i64::from_str_radix(&gamma, 2);
     let epsilon_value = i64::from_str_radix(&epsilon, 2);
-    
     println!("Part one {}", gamma_value.unwrap() * epsilon_value.unwrap());
 }
 
 fn part_two(data: &Vec<&str>) {
-    
     let mut oxygen_data = data.clone();
     let mut co2_data = data.clone();
     let len = data[0].chars().count();
 
     
     for i in 0..len {
-        let mut number_of_zero = 0;
-        let mut number_of_one = 0;
-        for line in oxygen_data.iter() {
-            if line.chars().nth(i).unwrap() == '1' {
-                number_of_one = number_of_one + 1;
-            } else {
-                number_of_zero = number_of_zero + 1;
-            }
-        }
-        if oxygen_data.len() > 1 { 
-            if number_of_zero > number_of_one {
-                oxygen_data = oxygen_data
+        let total_gamma = oxygen_data.len();
+        let number_of_gamma = oxygen_data.iter().filter(|line| line.chars().nth(i).unwrap() == '1').count();
+        if number_of_gamma <= total_gamma / 2 {
+            oxygen_data = oxygen_data
                 .iter()
                 .filter(|line| line.chars().nth(i).unwrap() == '0')
                 .cloned()
                 .collect();
-            } else {
-                oxygen_data = oxygen_data
-                .iter()
-                .filter(|line| line.chars().nth(i).unwrap() == '1')
-                .cloned()
-                .collect();
-            }
-        }  
-        number_of_zero = 0;
-        number_of_one = 0;
+        } else {
+            oxygen_data = oxygen_data
+            .iter()
+            .filter(|line| line.chars().nth(i).unwrap() == '1')
+            .cloned()
+            .collect();
+        }
+        let mut number_of_zero = 0;
+        let mut number_of_one = 0;
         for line in co2_data.iter() {
             if line.chars().nth(i).unwrap() == '1' {
                 number_of_one = number_of_one + 1;
