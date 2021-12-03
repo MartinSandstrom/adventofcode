@@ -2,24 +2,24 @@ use std::fs;
 
 
 fn part_one(data: &Vec<&str>) {
-    let mut gamma = String::from("");
-    let mut epsilon = String::from("");
-    let len = data[0].chars().count();
+    let mut most_common: String = String::from("");
+    let mut least_common: String = String::from("");
 
-    for i in 0..len {
-        let total = data.len();
-        let number_of_gamma = data.iter().filter(|line| line.chars().nth(i).unwrap() == '1').count();
-        if number_of_gamma > total - number_of_gamma {
-            gamma.push('1');
-            epsilon.push('0');
+    for i in 0..data[0].chars().count() {
+        let number_of_one = data.iter().filter(|line| line.chars().nth(i).unwrap() == '1').count();
+        if number_of_one > data.len() - number_of_one {
+            most_common.push('1');
+            least_common.push('0');
         } else {
-            gamma.push('0');
-            epsilon.push('1');
+            most_common.push('0');
+            least_common.push('1');
         }
     }
-    let gamma_value = i64::from_str_radix(&gamma, 2);
-    let epsilon_value = i64::from_str_radix(&epsilon, 2);
-    println!("Part one {}", gamma_value.unwrap() * epsilon_value.unwrap());
+
+    let gamma: i32 = i32::from_str_radix(&most_common, 2).unwrap();
+    let epsilon: i32 = i32::from_str_radix(&least_common, 2).unwrap();
+    
+    println!("Part one {}", gamma * epsilon);
 }
 
 fn part_two(data: &Vec<&str>) {
@@ -29,8 +29,8 @@ fn part_two(data: &Vec<&str>) {
 
     
     for i in 0..len {
-        let number_of_gamma = oxygen_data.iter().filter(|line| line.chars().nth(i).unwrap() == '1').count();
-        if number_of_gamma >= oxygen_data.len() - number_of_gamma {
+        let number_of_one = oxygen_data.iter().filter(|line| line.chars().nth(i).unwrap() == '1').count();
+        if number_of_one >= oxygen_data.len() - number_of_one {
             oxygen_data = oxygen_data
                 .iter()
                 .filter(|line| line.chars().nth(i).unwrap() == '1')
@@ -44,9 +44,9 @@ fn part_two(data: &Vec<&str>) {
             .collect();
         }
         
-        let number_of_epsilon = co2_data.iter().filter(|line| line.chars().nth(i).unwrap() == '0').count();
+        let number_of_zero = co2_data.iter().filter(|line| line.chars().nth(i).unwrap() == '0').count();
         if co2_data.len() > 1 {
-            if number_of_epsilon <= co2_data.len() - number_of_epsilon  {
+            if number_of_zero <= co2_data.len() - number_of_zero  {
                 co2_data = co2_data
                     .iter()
                     .filter(|line| line.chars().nth(i).unwrap() == '0')
