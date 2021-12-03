@@ -1,16 +1,12 @@
 use std::fs;
 
 fn part_one(data: &Vec<u32>) {
-    let count = data.windows(2)
-        .filter(|w| w[1] > w[0])
-        .count();
+    let count = data.windows(2).filter(|w| w[1] > w[0]).count();
     println!("Part one: {}", count);
 }
 
 fn part_two(data: &Vec<u32>) {
-    let count = data.windows(4)
-        .filter(|w| w[3] > w[0])
-        .count();
+    let count = data.windows(4).filter(|w| w[3] > w[0]).count();
     println!("Part two: {}", count);
 }
 

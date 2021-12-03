@@ -1,12 +1,14 @@
 use std::fs;
 
-
 fn part_one(data: &Vec<&str>) {
     let mut most_common: Vec<char> = Vec::new();
     let mut least_common: Vec<char> = Vec::new();
 
     for i in 0..data[0].chars().count() {
-        let number_of_one = data.iter().filter(|line| line.chars().nth(i).unwrap() == '1').count();
+        let number_of_one = data
+            .iter()
+            .filter(|line| line.chars().nth(i).unwrap() == '1')
+            .count();
         if number_of_one > data.len() - number_of_one {
             most_common.push('1');
             least_common.push('0');
@@ -16,8 +18,8 @@ fn part_one(data: &Vec<&str>) {
         }
     }
 
-    let gamma: i32 = i32::from_str_radix( &String::from_iter(most_common), 2).unwrap();
-    let epsilon: i32 = i32::from_str_radix( &String::from_iter(least_common), 2).unwrap();
+    let gamma: i32 = i32::from_str_radix(&String::from_iter(most_common), 2).unwrap();
+    let epsilon: i32 = i32::from_str_radix(&String::from_iter(least_common), 2).unwrap();
 
     println!("Part one {}", gamma * epsilon);
 }
@@ -26,9 +28,12 @@ fn part_two(data: &Vec<&str>) {
     let mut oxygen_data = data.clone();
     let mut co2_data = data.clone();
     let len = data[0].chars().count();
-    
+
     for i in 0..len {
-        let number_of_one = oxygen_data.iter().filter(|line| line.chars().nth(i).unwrap() == '1').count();
+        let number_of_one = oxygen_data
+            .iter()
+            .filter(|line| line.chars().nth(i).unwrap() == '1')
+            .count();
         if number_of_one >= oxygen_data.len() - number_of_one {
             oxygen_data = oxygen_data
                 .iter()
@@ -37,15 +42,18 @@ fn part_two(data: &Vec<&str>) {
                 .collect();
         } else {
             oxygen_data = oxygen_data
+                .iter()
+                .filter(|line| line.chars().nth(i).unwrap() == '0')
+                .cloned()
+                .collect();
+        }
+
+        let number_of_zero = co2_data
             .iter()
             .filter(|line| line.chars().nth(i).unwrap() == '0')
-            .cloned()
-            .collect();
-        }
-        
-        let number_of_zero = co2_data.iter().filter(|line| line.chars().nth(i).unwrap() == '0').count();
+            .count();
         if co2_data.len() > 1 {
-            if number_of_zero <= co2_data.len() - number_of_zero  {
+            if number_of_zero <= co2_data.len() - number_of_zero {
                 co2_data = co2_data
                     .iter()
                     .filter(|line| line.chars().nth(i).unwrap() == '0')
@@ -53,10 +61,10 @@ fn part_two(data: &Vec<&str>) {
                     .collect();
             } else {
                 co2_data = co2_data
-                .iter()
-                .filter(|line| line.chars().nth(i).unwrap() == '1')
-                .cloned()
-                .collect();
+                    .iter()
+                    .filter(|line| line.chars().nth(i).unwrap() == '1')
+                    .cloned()
+                    .collect();
             }
         }
     }
@@ -69,9 +77,7 @@ fn part_two(data: &Vec<&str>) {
 
 fn main() {
     let contents: String = fs::read_to_string("./puzzle.txt").expect("Unable to open");
-    let data: Vec<&str> = contents 
-                .split('\n')
-                .collect();
+    let data: Vec<&str> = contents.split('\n').collect();
 
     part_one(&data);
     part_two(&data);
