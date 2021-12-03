@@ -9,7 +9,7 @@ fn part_one(data: &Vec<&str>) {
     for i in 0..len {
         let total = data.len();
         let number_of_gamma = data.iter().filter(|line| line.chars().nth(i).unwrap() == '1').count();
-        if number_of_gamma > total / 2 {
+        if number_of_gamma > total - number_of_gamma {
             gamma.push('1');
             epsilon.push('0');
         } else {
@@ -29,37 +29,29 @@ fn part_two(data: &Vec<&str>) {
 
     
     for i in 0..len {
-        let total_gamma = oxygen_data.len();
         let number_of_gamma = oxygen_data.iter().filter(|line| line.chars().nth(i).unwrap() == '1').count();
-        if number_of_gamma <= total_gamma / 2 {
+        if number_of_gamma >= oxygen_data.len() - number_of_gamma {
             oxygen_data = oxygen_data
                 .iter()
-                .filter(|line| line.chars().nth(i).unwrap() == '0')
+                .filter(|line| line.chars().nth(i).unwrap() == '1')
                 .cloned()
                 .collect();
         } else {
             oxygen_data = oxygen_data
             .iter()
-            .filter(|line| line.chars().nth(i).unwrap() == '1')
+            .filter(|line| line.chars().nth(i).unwrap() == '0')
             .cloned()
             .collect();
         }
-        let mut number_of_zero = 0;
-        let mut number_of_one = 0;
-        for line in co2_data.iter() {
-            if line.chars().nth(i).unwrap() == '1' {
-                number_of_one = number_of_one + 1;
-            } else {
-                number_of_zero = number_of_zero + 1;
-            }
-        }
-        if co2_data.len() > 1 { 
-            if number_of_zero <= number_of_one {
+        
+        let number_of_epsilon = co2_data.iter().filter(|line| line.chars().nth(i).unwrap() == '0').count();
+        if co2_data.len() > 1 {
+            if number_of_epsilon <= co2_data.len() - number_of_epsilon  {
                 co2_data = co2_data
-                .iter()
-                .filter(|line| line.chars().nth(i).unwrap() == '0')
-                .cloned()
-                .collect();
+                    .iter()
+                    .filter(|line| line.chars().nth(i).unwrap() == '0')
+                    .cloned()
+                    .collect();
             } else {
                 co2_data = co2_data
                 .iter()
@@ -67,15 +59,13 @@ fn part_two(data: &Vec<&str>) {
                 .cloned()
                 .collect();
             }
-        } 
+        }
     }
 
-    let z = i64::from_str_radix(&oxygen_data[0], 2);
-    let y = i64::from_str_radix(&co2_data[0], 2);
+    let oxygen_value = i64::from_str_radix(&oxygen_data[0], 2).unwrap();
+    let co2_value = i64::from_str_radix(&co2_data[0], 2).unwrap();
 
-    
-    println!("Part Two 2372923");
-    println!("Part Two {}", y.unwrap() * z.unwrap());
+    println!("Part Two {}", oxygen_value * co2_value);
 }
 
 fn main() {
