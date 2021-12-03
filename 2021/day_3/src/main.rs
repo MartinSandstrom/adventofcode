@@ -37,20 +37,12 @@ fn part_two(data: &Vec<Vec<char>>) {
             oxygen_data = oxygen_data.iter().filter(filter_zero).cloned().collect();
         }
 
-        let number_of_zero = co2_data.iter().filter(|line| line[i] == '0').count();
+        let number_of_zero = co2_data.iter().filter(filter_zero).count();
         if co2_data.len() > 1 {
             if number_of_zero <= co2_data.len() - number_of_zero {
-                co2_data = co2_data
-                    .iter()
-                    .filter(|line| line[i] == '0')
-                    .cloned()
-                    .collect();
+                co2_data = co2_data.iter().filter(filter_zero).cloned().collect();
             } else {
-                co2_data = co2_data
-                    .iter()
-                    .filter(|line| line[i] == '1')
-                    .cloned()
-                    .collect();
+                co2_data = co2_data.iter().filter(filter_one).cloned().collect();
             }
         }
     }
