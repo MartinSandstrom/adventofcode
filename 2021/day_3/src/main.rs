@@ -50,7 +50,7 @@ fn part_two(data: &Vec<Vec<char>>) {
     let oxygen_value: i64 = i64::from_str_radix(&String::from_iter(&oxygen_data[0]), 2).unwrap();
     let co2_value: i64 = i64::from_str_radix(&String::from_iter(&co2_data[0]), 2).unwrap();
 
-    println!("Part Two 2372923 {}", oxygen_value * co2_value);
+    println!("Part Two {}", oxygen_value * co2_value);
 }
 
 fn main() {
