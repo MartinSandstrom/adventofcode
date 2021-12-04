@@ -30,7 +30,7 @@ fn part_two(data: &Vec<Vec<char>>) {
         let number_of_one = oxygen_data.iter().filter(|line| line[i] == '1').count();
         let filter_one = |line: &&Vec<char>| line[i] == '1';
         let filter_zero = |line: &&Vec<char>| line[i] == '0';
-
+        
         if number_of_one >= oxygen_data.len() - number_of_one {
             oxygen_data = oxygen_data.iter().filter(filter_one).cloned().collect();
         } else {
