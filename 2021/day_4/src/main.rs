@@ -1,4 +1,4 @@
-use std::fs;
+use std::{fs, ops::RangeBounds};
 
 #[derive(Debug, Copy, Clone)]
 struct Number {
@@ -63,39 +63,30 @@ fn part_one (numbers: Vec<i32>, mut bingo_array: Vec<Vec<Vec<Number>>>) {
     }
 }
 
-fn has_won_last(mut bingo_array: Vec<Vec<Vec<Number>>>, number: &i32, winners: Vec<&i32>) -> bool {
-    for bingo_brick in bingo_array.iter_mut() {
+fn has_won_last(mut bingo_brick: Vec<Vec<Number>>, number: &i32, winners: Vec<usize>) -> bool {
+    for bingo_row in bingo_brick.iter_mut() {
+        let count = bingo_row.iter().filter(|value| value.drawn).count();
+        if count == 5 {
+            return true;
+        }
+    }
+    for i in 0..5 {
+        let mut col_count = 0;
         for bingo_row in bingo_brick.iter_mut() {
-            let count = bingo_row.iter().filter(|value| value.drawn).count();
-            if count == 5 {
-                if winners.len() == 2 {
-                    show_score(bingo_brick.clone(), number, "two");
-                }
-                return true;
+            let bingo_value = bingo_row[i];
+            if bingo_value.drawn {
+                col_count += 1;
             }
         }
-        for i in 0..5 {
-            let mut col_count = 0;
-            for bingo_row in bingo_brick.iter_mut() {
-                let bingo_value = bingo_row[i];
-                if bingo_value.drawn {
-                    col_count += 1;
-                }
-            }
-            if col_count == 5 {
-                if winners.len() == 2 {
-                    show_score(bingo_brick.clone(), number, "two");
-                }
-                return true;
-            }
+        if col_count == 5 {
+            return true;
         }
-
     }
     return false;
 }
 
 fn part_two (numbers: Vec<i32>, mut bingo_array: Vec<Vec<Vec<Number>>>) {
-    let mut winners :Vec<&i32> = Vec::new();
+    let mut winners :Vec<usize> = Vec::new();
     for number in numbers.iter() {
         println!("Number drawn {:?}", number);
         for bingo_brick in bingo_array.iter_mut() {
@@ -108,7 +99,17 @@ fn part_two (numbers: Vec<i32>, mut bingo_array: Vec<Vec<Vec<Number>>>) {
                 }
             }
         }
-        if has_won_last(bingo_array.clone(), number, winners.clone()) {
+        for index in 0..bingo_array.len() {
+            let bingo_brick = bingo_array[index].clone();
+            if has_won_last(bingo_brick.to_vec(), number, winners.clone()) {
+                if !winners.contains(&index) {
+                    winners.push(index);
+                }
+                if winners.len() == 100 {
+                    show_score(bingo_brick.clone(), number, "two");
+                    return;
+                }
+            }
         }
     }
 }
