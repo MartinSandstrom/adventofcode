@@ -6,11 +6,6 @@ struct Number {
     number: i32,
 }
 
-#[derive(Copy, Clone)]
-struct Brick {
-    
-}
-
 fn show_score(mut bingo_brick: Vec<Vec<Number>>, number: &i32) {
     println!("BINGO {:?}", bingo_brick);
     println!("Number {:?}", number);
